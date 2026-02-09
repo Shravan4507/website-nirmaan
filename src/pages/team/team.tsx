@@ -4,8 +4,8 @@ import './team.css'
 const ALL_MEMBERS = [
     // Core Leadership
     {
-        image: 'src/assets/members/Shravan G.png',
-        title: 'Shrvan',
+        image: 'members/Shravan G.png',
+        title: 'Shravan G',
         subtitle: 'Event Lead',
         location: 'Core Leadership',
         handle: '@shravan45x',
@@ -145,6 +145,7 @@ function Team() {
                     damping={0.5}
                     fadeOut={0.8}
                     columns={3}
+                    showRegister={false}
                 />
             </div>
         </main>

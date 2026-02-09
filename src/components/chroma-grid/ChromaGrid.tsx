@@ -32,6 +32,7 @@ export interface ChromaGridProps {
     damping?: number;
     fadeOut?: number;
     ease?: string;
+    showRegister?: boolean;
 }
 
 type SetterFn = (v: number | string) => void;
@@ -61,7 +62,8 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
     rows = 2,
     damping = 0.45,
     fadeOut = 0.6,
-    ease = 'power3.out'
+    ease = 'power3.out',
+    showRegister = true
 }) => {
     const rootRef = useRef<HTMLDivElement>(null);
     const fadeRef = useRef<HTMLDivElement>(null);
@@ -222,9 +224,11 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
                                     {selectedMember.description}
                                 </p>
                                 <div className="modal-actions">
-                                    <Link to={`/register?comp=${encodeURIComponent(selectedMember.title)}`} className="register-btn">
-                                        Register Now
-                                    </Link>
+                                    {showRegister && (
+                                        <Link to={`/register?comp=${encodeURIComponent(selectedMember.title)}`} className="register-btn">
+                                            Register Now
+                                        </Link>
+                                    )}
                                     <div className="modal-socials">
                                         {selectedMember.socials?.linkedin && (
                                             <a href={selectedMember.socials.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon-btn" title="LinkedIn">
