@@ -17,7 +17,7 @@ const ROLES = [
         id: 'documentation',
         tag: 'Media',
         title: 'DOCUMENTATION',
-        desc: 'Capture the history of Zealcon. Record events through photography, videography, and reporting.',
+        desc: 'Capture the history of Nirmaan. Record events through photography, videography, and reporting.',
         duration: '6s'
     },
     {
@@ -38,7 +38,7 @@ const ROLES = [
         id: 'creative',
         tag: 'Arts',
         title: 'CREATIVE',
-        desc: 'Curate unique experiences and artistic elements that make Zealcon stand out.',
+        desc: 'Curate unique experiences and artistic elements that make Nirmaan stand out.',
         duration: '5.5s'
     },
     {
@@ -200,7 +200,7 @@ function Join() {
             <header className="join-hero">
                 <h1 className="join-title">Shape the Future of Innovation</h1>
                 <p className="join-subtitle">
-                    Zealcon isn't just an event; it's a legacy built by the most driven minds on campus.
+                    Nirmaan isn't just an event; it's a legacy built by the most driven minds on campus.
                     Join the team that turns vision into reality.
                 </p>
                 <a href="#roles" className="join-hero-btn">
@@ -260,7 +260,7 @@ function Join() {
                         <div className="join-modal-header">
                             <div>
                                 <h2>Festival Volunteer Application</h2>
-                                <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: '0.5rem' }}>Be a part of Zealcon '26</p>
+                                <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: '0.5rem' }}>Be a part of Nirmaan '26</p>
                             </div>
                             <button className="join-modal-close" onClick={handleClose}>&times;</button>
                         </div>

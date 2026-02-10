@@ -12,7 +12,7 @@ function Competitions() {
             <header className="competitions-header">
                 <div className="header-glow"></div>
                 <h1>Arena of Excellence</h1>
-                <p>Push your limits, showcase your skills, and claim glory. Zealcon '26 presents the most prestigious technical and gaming arena of the year.</p>
+                <p>Push your limits, showcase your skills, and claim glory. Nirmaan '26 presents the most prestigious technical and gaming arena of the year.</p>
             </header>
 
             <section className="competition-section flagship-section">

@@ -23,6 +23,16 @@
 
 .login-card__header {
     margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.login-card__logo {
+    height: 2.3rem;
+    width: auto;
+    object-fit: contain;
 }
 
 .login-card__title {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../../assets/logos/Logo - White.png'
+const logo = `${import.meta.env.BASE_URL}assets/logos/Logo - White - A.png`
 import './Navbar.css'
 
 const TABS = [
@@ -29,7 +29,7 @@ function Navbar() {
         </div>
         <div className="navbar__center">
           <Link to="/" className="navbar__logo-link" aria-label="Home">
-            <img src={logo} alt="Zealcon" className="navbar__logo" />
+            <img src={logo} alt="Nirmaan '26" className="navbar__logo" />
           </Link>
         </div>
         <div className="navbar__right">

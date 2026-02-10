@@ -4,12 +4,12 @@ import './team.css'
 const ALL_MEMBERS = [
     // Core Leadership
     {
-        image: 'members/Shravan G.png',
+        image: `${import.meta.env.BASE_URL}members/Shravan G.png`,
         title: 'Shravan G',
         subtitle: 'Event Lead',
         location: 'Core Leadership',
         handle: '@shravan45x',
-        description: 'Visionary leader driving the strategic direction of Zealcon \'26. Passionate about creating a platform where technology meets creativity. Leading over 100+ volunteers to deliver a world-class experience.',
+        description: 'Visionary leader driving the strategic direction of Nirmaan \'26. Passionate about creating a platform where technology meets creativity. Leading over 100+ volunteers to deliver a world-class experience.',
         borderColor: '#5227FF',
         gradient: 'linear-gradient(145deg, #5227FF, #000)',
         url: 'https://instagram.com/shravan45x',
@@ -73,7 +73,7 @@ const ALL_MEMBERS = [
         subtitle: 'Chief Designer',
         location: 'Technical & Design',
         handle: '@ananya_design',
-        description: 'Crafting the visual identity of Zealcon. Bringing aesthetic elegance and user-centric design to every digital touchpoint. Created the unique grainient branding for this year.',
+        description: 'Crafting the visual identity of Nirmaan. Bringing aesthetic elegance and user-centric design to every digital touchpoint. Created the unique grainient branding for this year.',
         borderColor: '#5227FF',
         gradient: 'linear-gradient(165deg, #5227FF, #000)',
         url: 'https://instagram.com/ananya_design',
@@ -119,7 +119,7 @@ const ALL_MEMBERS = [
         subtitle: 'Marketing Head',
         location: 'Marketing & PR',
         handle: '@sahil_mkt',
-        description: 'Strategic marketer expanding the reach of Zealcon across the nation. Expertise in digital campaigns and audience engagement.',
+        description: 'Strategic marketer expanding the reach of Nirmaan across the nation. Expertise in digital campaigns and audience engagement.',
         borderColor: '#d9ff00',
         gradient: 'linear-gradient(135deg, #d9ff00, #000)',
         url: 'https://linkedin.com/',
@@ -135,7 +135,7 @@ function Team() {
         <main className="team-page">
             <header className="team-header">
                 <h1>The Visionaries</h1>
-                <p>Meet the dedicated team working behind the scenes to make Zealcon '26 the biggest technology festival of the year. Passion, innovation, and coordination is what defines us.</p>
+                <p>Meet the dedicated team working behind the scenes to make Nirmaan '26 the biggest technology festival of the year. Passion, innovation, and coordination is what defines us.</p>
             </header>
 
             <div className="team-container" style={{ position: 'relative', minHeight: '800px' }}>

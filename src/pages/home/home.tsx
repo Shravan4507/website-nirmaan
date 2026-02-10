@@ -1,6 +1,6 @@
 import StarBorder from '../../components/star-border/StarBorder'
-import zcoerLogo from '../../assets/logos/ZCOER-Logo-White.png'
-import zealconTitle from '../../assets/logos/Logo-2-white.png'
+const zcoerLogo = `${import.meta.env.BASE_URL}assets/logos/ZCOER-Logo-White.png`
+const nirmaanTitle = `${import.meta.env.BASE_URL}assets/logos/Logo-2-White.png`
 import './home.css'
 
 function Home() {
@@ -16,13 +16,13 @@ function Home() {
             />
           </button>
           <img
-            src={zealconTitle}
-            alt="ZEALCON '26"
+            src={nirmaanTitle}
+            alt="NIRMAAN '26"
             className="hero__title"
           />
           <p className="hero__tagline">Where Curiosity Becomes Creation</p>
           <div className="hero__cta">
-            <a href="/login" className="hero__cta-link">
+            <a href="/website-nirmaan/login" className="hero__cta-link">
               Get Started
             </a>
           </div>
@@ -34,16 +34,16 @@ function Home() {
           <h2 className="about__title">
             <span className="about__title-text">What is</span>
             <img
-              src={zealconTitle}
-              alt="ZEALCON '26"
+              src={nirmaanTitle}
+              alt="NIRMAAN '26"
               className="about__title-logo"
             />
           </h2>
           <p className="about__description">
-            ZEALCON '26 is the annual technical festival of Zeal College of Engineering and Research, Pune.
+            NIRMAAN '26 is the annual technical festival of Zeal College of Engineering and Research, Pune.
             It brings together brilliant minds from across the nation to compete, innovate, and celebrate
             the spirit of technology and creativity. From intense coding battles to innovative robotics
-            challenges, ZEALCON offers a platform for students to showcase their talents and push the
+            challenges, NIRMAAN offers a platform for students to showcase their talents and push the
             boundaries of what's possible.
           </p>
         </div>

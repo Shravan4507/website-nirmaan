@@ -1,5 +1,7 @@
 import './login.css'
 
+const nirmaanLogo = `${import.meta.env.BASE_URL}assets/logos/Logo-2-White.png`
+
 function Login() {
     const handleGoogleLogin = () => {
         // Logic for Google Login will go here
@@ -10,8 +12,9 @@ function Login() {
         <div className="login-container">
             <div className="login-card">
                 <div className="login-card__header">
+                    <img src={nirmaanLogo} alt="Nirmaan '26" className="login-card__logo" />
                     <h2 className="login-card__title">Welcome Back</h2>
-                    <p className="login-card__subtitle">Join the technical revolution at Zealcon '26</p>
+                    <p className="login-card__subtitle">Join the technical revolution at Nirmaan '26</p>
                 </div>
 
                 <div className="login-card__content">

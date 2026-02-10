@@ -129,7 +129,7 @@ function Register() {
 
                 <header className="register-header">
                     <h1>Competition Entry</h1>
-                    <p>Secure your slot in the grand technical battlefield of Zealcon ’26.</p>
+                    <p>Secure your slot in the grand technical battlefield of Nirmaan ’26.</p>
                 </header>
 
                 <div className="register-steps">

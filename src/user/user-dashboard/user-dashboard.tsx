@@ -18,7 +18,7 @@ function UserDashboard() {
     const [user, setUser] = useState({
         firstName: "Alex",
         lastName: "Johnson",
-        zKey: "ZCN-ALE-0001",
+        zKey: "NRM-ALE-0001",
         email: "alex.johnson@example.com",
         phone: "+91 98765 43210",
         dob: "2004-05-15",

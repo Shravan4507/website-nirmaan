@@ -1,8 +1,8 @@
-# Zealcon '26 - Official Website 🚀✨
+# Nirmaan '26 - Official Website 🚀✨
 
-**Zealcon** is the premier technology festival organized by ZCOER, designed to push the boundaries of innovation and technical excellence. This website serves as the digital gateway for thousands of students and technology enthusiasts to explore, join, and partner with the festival.
-
-🔗 **Live Demo:** [shravan4507.github.io/website-zealcon/](https://shravan4507.github.io/website-zealcon/)
+**Nirmaan** is the premier technology festival organized by ZCOER, designed to push the boundaries of innovation and technical excellence. This website serves as the digital gateway for thousands of students and technology enthusiasts to explore, join, and partner with the festival.
+   
+🔗 **Live Demo:** [shravan4507.github.io/website-nirmaan/](https://shravan4507.github.io/website-nirmaan/)
 
 ---
 
@@ -41,7 +41,7 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Shravan4507/website-zealcon.git
+   git clone https://github.com/Shravan4507/website-nirmaan.git
    ```
 
 2. **Install dependencies:**
@@ -63,4 +63,4 @@
 
 ## 📜 License
 
-Created with innovation by the **Zealcon Team**. All rights reserved. ⚡💖
+Created with innovation by the **Nirmaan Team**. All rights reserved. ⚡💖

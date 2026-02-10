@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import zealconLogo from '../../assets/logos/Logo-2-white.png'
+const nirmaanLogo = `${import.meta.env.BASE_URL}assets/logos/Logo-2-White.png`
 import './Footer.css'
 
 function Footer() {
@@ -7,7 +7,7 @@ function Footer() {
         <footer className="footer">
             <div className="footer__content">
                 <div className="footer__brand">
-                    <img src={zealconLogo} alt="Zealcon '26" className="footer__logo" />
+                    <img src={nirmaanLogo} alt="Nirmaan '26" className="footer__logo" />
                     <p className="footer__tagline">
                         The official annual technical festival of Zeal College of Engineering & Research.
                     </p>
@@ -28,7 +28,7 @@ function Footer() {
                         <h3 className="footer__heading">Get Involved</h3>
                         <nav className="footer__nav">
                             <Link to="/join" className="footer__link">Join the Team</Link>
-                            <Link to="/members" className="footer__link">Zealcon Team</Link>
+                            <Link to="/members" className="footer__link">Nirmaan Team</Link>
                             <Link to="/contact" className="footer__link">Contact Us</Link>
                             <Link to="/login" className="footer__link">Login</Link>
                         </nav>
@@ -38,7 +38,7 @@ function Footer() {
                         <h3 className="footer__heading">Connect</h3>
                         <nav className="footer__nav">
                             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer__link">Instagram</a>
-                            <a href="mailto:contact@zealcon.in" className="footer__link">E-mail</a>
+                            <a href="mailto:contact@nirmaan.in" className="footer__link">E-mail</a>
                         </nav>
                     </div>
 
@@ -55,14 +55,14 @@ function Footer() {
 
             <div className="footer__bottom">
                 <div className="footer__bottom-left">
-                    <p className="footer__copyright">© 2026 Zealcon. All rights reserved.</p>
+                    <p className="footer__copyright">© 2026 Nirmaan. All rights reserved.</p>
                     <div className="footer__legal">
                         <Link to="/privacy" className="footer__link">Privacy Policy</Link>
                         <span className="footer__separator">•</span>
                         <Link to="/terms" className="footer__link">Terms of Service</Link>
                     </div>
                 </div>
-                <p className="footer__credit">Crafted with innovation by the <Link to="/team" className="footer__link">Zealcon Team</Link></p>
+                <p className="footer__credit">Crafted with innovation by the <Link to="/team" className="footer__link">Nirmaan Team</Link></p>
             </div>
         </footer>
     )

@@ -10,7 +10,7 @@ const dayPasses = [
         subtitle: 'The Inception',
         image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80',
         price: '₹0',
-        description: 'Zealcon ’26 kicks off with a surge of energy! Day 1 is dedicated to the grand inauguration, keynote sessions from industry titans, and the commencement of our flagship 24-hour hackathons. Immerse yourself in the world of high-impact technology and networking.',
+        description: 'Nirmaan ’26 kicks off with a surge of energy! Day 1 is dedicated to the grand inauguration, keynote sessions from industry titans, and the commencement of our flagship 24-hour hackathons. Immerse yourself in the world of high-impact technology and networking.',
         features: [
             'Grand Inauguration Ceremony',
             'Keynote: Future of Web3',
@@ -40,7 +40,7 @@ const dayPasses = [
         subtitle: 'The Grand Finale',
         image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&q=80',
         price: '₹10',
-        description: 'Celebration, recognition, and pure entertainment. Day 3 features the grand finales of all major competitions, the prestigious award ceremony, and an unforgettable celebrity performance night to close Zealcon ’26 in style.',
+        description: 'Celebration, recognition, and pure entertainment. Day 3 features the grand finales of all major competitions, the prestigious award ceremony, and an unforgettable celebrity performance night to close Nirmaan ’26 in style.',
         features: [
             'Grand Finale: Battle-Grid & Codex',
             'Prestigious Award Ceremony',
@@ -94,7 +94,7 @@ function Events() {
             <header className="events-header">
                 <div className="header-glow"></div>
                 <h1>Festival Journey</h1>
-                <p>Experience the multi-day odyssey of Zealcon ’26. From high-stakes hackathons to celebrity showcases, reserve your spot for the definitive technical festival.</p>
+                <p>Experience the multi-day odyssey of Nirmaan ’26. From high-stakes hackathons to celebrity showcases, reserve your spot for the definitive technical festival.</p>
             </header>
 
             <section className="events" id="events">

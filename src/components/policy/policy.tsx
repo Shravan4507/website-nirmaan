@@ -9,7 +9,7 @@ export const PrivacyPolicy = () => {
 
                 <div className="policy-section">
                     <h2>1. Introduction</h2>
-                    <p>Welcome to Zealcon '26. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
+                    <p>Welcome to Nirmaan '26. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
                 </div>
 
                 <div className="policy-section">
@@ -44,7 +44,7 @@ export const PrivacyPolicy = () => {
 
                 <div className="policy-section">
                     <h2>6. Contact Us</h2>
-                    <p>If you have questions or comments about this policy, you may email us at contact@zealcon.in</p>
+                    <p>If you have questions or comments about this policy, you may email us at contact@nirmaan.in</p>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@ export const TermsOfService = () => {
 
                 <div className="policy-section">
                     <h2>1. Agreement to Terms</h2>
-                    <p>These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity and Zealcon '26, concerning your access to and use of the website.</p>
+                    <p>These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity and Nirmaan '26, concerning your access to and use of the website.</p>
                 </div>
 
                 <div className="policy-section">
@@ -80,7 +80,7 @@ export const TermsOfService = () => {
 
                 <div className="policy-section">
                     <h2>5. Event Participation</h2>
-                    <p>Participation in Zealcon '26 events is subject to individual event rules and regulations. We reserve the right to disqualify any participant found violating these rules.</p>
+                    <p>Participation in Nirmaan '26 events is subject to individual event rules and regulations. We reserve the right to disqualify any participant found violating these rules.</p>
                 </div>
 
                 <div className="policy-section">

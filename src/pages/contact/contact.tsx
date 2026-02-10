@@ -27,7 +27,7 @@ function Contact() {
                 <div className="contact-info">
                     <h1 className="contact-title">Get in Touch</h1>
                     <p className="contact-subtitle">
-                        Have questions about Zealcon '26? We're here to help. Send us a message and we'll respond as soon as possible.
+                        Have questions about Nirmaan '26? We're here to help. Send us a message and we'll respond as soon as possible.
                     </p>
 
                     <div className="info-items">
@@ -55,7 +55,7 @@ function Contact() {
                             </div>
                             <div className="info-text">
                                 <h3>Email</h3>
-                                <a href="mailto:support.zealcon@zealeducation.com">support.zealcon@zealeducation.com</a>
+                                <a href="mailto:support.nirmaan@zealeducation.com">support.nirmaan@zealeducation.com</a>
                             </div>
                         </div>
 
