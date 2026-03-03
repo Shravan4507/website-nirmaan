@@ -7,25 +7,53 @@
 
 .team-header {
     text-align: center;
-    margin-bottom: 80px;
-    animation: fadeInDown 0.8s ease-out;
+    padding: 4rem 2rem;
+    position: relative;
+    z-index: 10;
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-glow {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(82, 39, 255, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .team-header h1 {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    background: linear-gradient(to right, #fff, #5227FF);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, #fff 40%, rgba(255, 255, 255, 0.4));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .team-header p {
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.6);
-    max-width: 700px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 0 auto 50px;
     line-height: 1.6;
 }
 

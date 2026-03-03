@@ -1,11 +1,21 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './admin-signup.css'
 
 const nirmaanLogo = `${import.meta.env.BASE_URL}assets/logos/Logo-2-White.png`
 
 function AdminSignup() {
+    const navigate = useNavigate()
+    const [showSelection, setShowSelection] = useState(false)
+
     const handleGoogleSignup = () => {
-        // Logic for Google Signup will go here
-        console.log('Google Signup Clicked')
+        // In the future, this will handle Google Auth
+        // For now, we show the selection pop-up directly
+        setShowSelection(true)
+    }
+
+    const handleChoice = (type: 'student' | 'faculty') => {
+        navigate(`/admin-signup-form?type=${type}`)
     }
 
     return (
@@ -37,6 +47,40 @@ function AdminSignup() {
                     </p>
                 </div>
             </div>
+
+            {showSelection && (
+                <div className="selection-overlay" onClick={() => window.location.reload()}>
+                    <div className="selection-modal" onClick={(e) => e.stopPropagation()}>
+                        <h2>Identify Yourself</h2>
+                        <p>Tell us more about your primary role at Nirmaan '26</p>
+
+                        <div className="selection-grid">
+                            <div className="selection-card student" onClick={() => handleChoice('student')}>
+                                <div className="selection-card__icon">
+                                    <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                    </svg>
+                                </div>
+                                <h3>Student</h3>
+                                <span>Organizing Member</span>
+                            </div>
+
+                            <div className="selection-card faculty" onClick={() => handleChoice('faculty')}>
+                                <div className="selection-card__icon">
+                                    <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg>
+                                </div>
+                                <h3>Faculty</h3>
+                                <span>Department Coordinator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

@@ -26,19 +26,36 @@
     border-radius: 34px;
     color: #fff;
     font-size: 1.1rem;
-    cursor: pointer;
+    cursor: text;
     transition: all 0.2s ease;
     font-family: inherit;
 }
 
-.calendar-icon {
+.calendar-icon-wrapper {
     position: absolute;
-    right: 1.5rem;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.calendar-icon-wrapper:hover {
+    background: rgba(230, 91, 255, 0.1);
+}
+
+.calendar-icon {
     width: 20px;
     height: 20px;
     opacity: 0.5;
     transition: all 0.3s ease;
-    pointer-events: none;
     color: #fff;
 }
 

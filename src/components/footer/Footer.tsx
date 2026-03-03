@@ -5,64 +5,75 @@ import './Footer.css'
 function Footer() {
     return (
         <footer className="footer">
-            <div className="footer__content">
-                <div className="footer__brand">
-                    <img src={nirmaanLogo} alt="Nirmaan '26" className="footer__logo" />
-                    <p className="footer__tagline">
-                        The official annual technical festival of Zeal College of Engineering & Research.
-                    </p>
-                </div>
-
-                <div className="footer__links">
-                    <div className="footer__column">
-                        <h3 className="footer__heading">Quick Links</h3>
-                        <nav className="footer__nav">
-                            <Link to="/" className="footer__link">Home</Link>
-                            <Link to="/events" className="footer__link">Events</Link>
-                            <Link to="/competitions" className="footer__link">Competitions</Link>
-                            <Link to="/sponsors" className="footer__link">Sponsors</Link>
-                        </nav>
+            <div className="footer__container">
+                <div className="footer__grid">
+                    <div className="footer__brand">
+                        <img src={nirmaanLogo} alt="Nirmaan '26" className="footer__logo" />
+                        <p className="footer__tagline">
+                            The official annual technical festival of Zeal College of Engineering & Research. 
+                            Pioneering innovation and technical excellence.
+                        </p>
+                        <div className="footer__socials">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="X (Twitter)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                            </a>
+                        </div>
                     </div>
 
-                    <div className="footer__column">
-                        <h3 className="footer__heading">Get Involved</h3>
-                        <nav className="footer__nav">
-                            <Link to="/join" className="footer__link">Join the Team</Link>
-                            <Link to="/members" className="footer__link">Nirmaan Team</Link>
-                            <Link to="/contact" className="footer__link">Contact Us</Link>
-                            <Link to="/login" className="footer__link">Login</Link>
-                        </nav>
-                    </div>
+                    <div className="footer__nav-group">
+                        <div className="footer__column">
+                            <h3 className="footer__heading">Navigation</h3>
+                            <nav className="footer__nav">
+                                <Link to="/" className="footer__link">Home</Link>
+                                <Link to="/workshops" className="footer__link">Workshops</Link>
+                                <Link to="/competitions" className="footer__link">Competitions</Link>
+                                <Link to="/sponsors" className="footer__link">Sponsors</Link>
+                            </nav>
+                        </div>
 
-                    <div className="footer__column">
-                        <h3 className="footer__heading">Connect</h3>
-                        <nav className="footer__nav">
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer__link">Instagram</a>
-                            <a href="mailto:contact@nirmaan.in" className="footer__link">E-mail</a>
-                        </nav>
-                    </div>
+                        <div className="footer__column">
+                            <h3 className="footer__heading">Information</h3>
+                            <nav className="footer__nav">
+                                <Link to="/join" className="footer__link">Join Us</Link>
+                                <Link to="/team" className="footer__link">Our Team</Link>
+                                <Link to="/contact" className="footer__link">Help Center</Link>
+                                <Link to="/login" className="footer__link">Accounts</Link>
+                            </nav>
+                        </div>
 
-                    <div className="footer__column">
-                        <h3 className="footer__heading">Location</h3>
-                        <address className="footer__address">
-                            <a href="https://maps.app.goo.gl/zr4Yg3uhrYabnjH49" target="_blank" rel="noopener noreferrer" className="footer__link">Zeal College of Engineering and Research<br /></a>
-                            Survey No-39, Dhayari Narhe Rd,<br />
-                            Narhe, Pune, Maharashtra 411041
-                        </address>
-                    </div>
-                </div>
-            </div>
-
-            <div className="footer__bottom">
-                <div className="footer__bottom-left">
-                    <p className="footer__copyright">© 2026 Nirmaan. All rights reserved.</p>
-                    <div className="footer__legal">
-                        <Link to="/privacy" className="footer__link">Privacy Policy</Link>
-                        <span className="footer__separator">•</span>
-                        <Link to="/terms" className="footer__link">Terms of Service</Link>
+                        <div className="footer__column">
+                            <h3 className="footer__heading">Contact</h3>
+                            <address className="footer__address">
+                                <a href="mailto:contact@nirmaan.in" className="footer__link">contact@nirmaan.in</a>
+                                <a href="tel:+911234567890" className="footer__link">+91 123 456 7890</a>
+                                <p className="address-text">
+                                    Zeal College, Narhe,<br />
+                                    Pune, Maharashtra 411041
+                                </p>
+                            </address>
+                        </div>
                     </div>
                 </div>
-                <p className="footer__credit">Crafted with innovation by the <Link to="/team" className="footer__link">Nirmaan Team</Link></p>
+
+                <div className="footer__bottom">
+                    <div className="footer__bottom-inner">
+                        <p className="footer__copyright">© 2026 Nirmaan. Pioneering Excellence.</p>
+                        <div className="footer__legal">
+                            <Link to="/privacy" className="footer__link">Privacy</Link>
+                            <Link to="/terms" className="footer__link">Terms</Link>
+                            <Link to="/cookies" className="footer__link">Cookies</Link>
+                        </div>
+                        <p className="footer__credit">
+                            Built with 🔥 by <Link to="/team">Nirmaan Tech</Link>
+                        </p>
+                    </div>
+                </div>
             </div>
         </footer>
     )

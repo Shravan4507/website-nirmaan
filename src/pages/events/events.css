@@ -1,4 +1,4 @@
-.events-page {
+.workshops-page {
     min-height: 100vh;
     padding-top: 100px;
     background: rgba(0, 0, 0, 0);
@@ -6,22 +6,35 @@
     overflow-x: hidden;
 }
 
-.events {
+.workshops {
     padding: 4rem 2rem;
     width: 100%;
 }
 
-.events__content {
+.workshops__content {
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
 }
 
-.events-header {
+.workshops-header {
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 6rem 2rem 4rem;
     position: relative;
     z-index: 10;
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .header-glow {
@@ -29,15 +42,25 @@
     top: -100px;
     left: 50%;
     transform: translateX(-50%);
-    width: 600px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(217, 255, 0, 0.1) 0%, transparent 70%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(217, 255, 0, 0.15) 0%, transparent 70%);
     pointer-events: none;
     z-index: -1;
 }
 
-.events-header h1 {
-    font-size: clamp(3rem, 8vw, 6rem);
+.section-label {
+    display: block;
+    color: #d9ff00;
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.workshops-header h1 {
+    font-size: clamp(3.5rem, 10vw, 7rem);
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: -2px;
@@ -46,25 +69,34 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    line-height: 1;
 }
 
-.events-header p {
-    font-size: 1.2rem;
+.workshops-header .section-line {
+    width: 80px;
+    height: 4px;
+    background: #d9ff00;
+    margin: 0 auto 30px;
+    border-radius: 2px;
+}
+
+.workshops-header p {
+    font-size: 1.25rem;
     color: rgba(255, 255, 255, 0.6);
     max-width: 800px;
-    margin: 0 auto 50px;
+    margin: 0 auto;
     line-height: 1.6;
 }
 
-/* Events Grid */
-.events__grid {
+/* Workshops Grid */
+.workshops__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
-/* Event Card */
-.event-card {
+/* Workshop Card */
+.workshop-card {
     min-height: 450px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -78,26 +110,26 @@
     transition: all 0.3s ease;
 }
 
-.event-card.selected {
+.workshop-card.selected {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(217, 255, 0, 0.02);
     box-shadow: 0 0 30px rgba(217, 255, 0, 0.05);
 }
 
-.event-card__btn--select.selected {
+.workshop-card__btn--select.selected {
     background: #d9ff00;
     color: #000;
     border-color: #d9ff00;
 }
 
 /* Card Image */
-.event-card__image-container {
+.workshop-card__image-container {
     position: relative;
     width: 100%;
     height: 250px;
 }
 
-.event-card__image {
+.workshop-card__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -106,7 +138,7 @@
 }
 
 /* Card Title */
-.event-card__title {
+.workshop-card__title {
     font-size: 2rem;
     font-weight: 600;
     color: white;
@@ -117,7 +149,7 @@
 }
 
 /* Card Features */
-.event-card__features {
+.workshop-card__features {
     list-style: none;
     padding: 0 1.5rem;
     margin: 0;
@@ -126,7 +158,7 @@
     gap: 0.5rem;
 }
 
-.event-card__features li {
+.workshop-card__features li {
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.98);
     text-align: left;
@@ -134,7 +166,7 @@
 }
 
 /* Card Price */
-.event-card__price {
+.workshop-card__price {
     font-size: 1.5rem;
     font-weight: 600;
     color: rgb(80, 249, 97);
@@ -145,13 +177,13 @@
 }
 
 /* Card Actions */
-.event-card__actions {
+.workshop-card__actions {
     display: flex;
     gap: 0.75rem;
     padding: 0 1.5rem;
 }
 
-.event-card__btn {
+.workshop-card__btn {
     flex: 1;
     padding: 0.75rem 0;
     border-radius: 9999px;
@@ -161,16 +193,16 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.event-card__btn:active {
+.workshop-card__btn:active {
     transform: scale(0.98);
 }
 
-.event-card__btn--explore {
+.workshop-card__btn--explore {
     background: transparent;
     color: white;
 }
 
-.event-card__btn--select {
+.workshop-card__btn--select {
     background: white;
     color: black;
     border-color: white;
@@ -178,19 +210,19 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-    .events__grid {
+    .workshops__grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
-    .events__grid {
+    .workshops__grid {
         grid-template-columns: 1fr;
     }
 }
 
 /* Modal Styling */
-.event-modal-overlay {
+.workshop-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -206,7 +238,7 @@
     padding: 20px;
 }
 
-.event-modal-content {
+.workshop-modal-content {
     width: 100%;
     height: 100%;
     max-width: 1280px;

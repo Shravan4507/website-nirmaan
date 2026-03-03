@@ -1,13 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import Grainient from './components/background/grainient'
 import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
+import PageTransition from './components/PageTransition'
 import Home from './pages/home/home'
-import Events from './pages/events/events'
+import Workshops from './pages/events/events'
 import Competitions from './pages/competitions/competitions'
 import Sponsors from './pages/sponsors/sponsors'
 import Team from './pages/team/team'
-import Join from './pages/join/join'
+import Schedule from './pages/schedule/schedule'
 import Contact from './pages/contact/contact'
 import Register from './pages/register/register'
 import Login from './components/login/login'
@@ -15,9 +17,43 @@ import { PrivacyPolicy, TermsOfService } from './components/policy/policy'
 import UserDashboard from './user/user-dashboard/user-dashboard'
 import AdminDashboard from './admin/admin-dashboard/admin-dashboard'
 import AdminSignup from './admin/admin-signup/admin-signup'
+import AdminSignupForm from './admin/admin-signup/admin-signup-form'
 import UserSignup from './user/user-signup/user-signup'
 import { ToastProvider } from './components/toast/Toast'
 import './App.css'
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  // Helper to wrap components with transitions
+  const withTransition = (element: React.ReactNode) => (
+    <PageTransition>{element}</PageTransition>
+  );
+
+  return (
+    <AnimatePresence mode="wait" initial={true}>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={withTransition(<Home />)} />
+        <Route path="/workshops" element={withTransition(<Workshops />)} />
+        <Route path="/competitions" element={withTransition(<Competitions />)} />
+        <Route path="/sponsors" element={withTransition(<Sponsors />)} />
+        <Route path="/team" element={withTransition(<Team />)} />
+        <Route path="/schedule" element={withTransition(<Schedule />)} />
+        <Route path="/contact" element={withTransition(<Contact />)} />
+        <Route path="/login" element={withTransition(<Login />)} />
+        <Route path="/user-signup" element={withTransition(<UserSignup />)} />
+        <Route path="/privacy" element={withTransition(<PrivacyPolicy />)} />
+        <Route path="/terms" element={withTransition(<TermsOfService />)} />
+        <Route path="/register" element={withTransition(<Register />)} />
+        <Route path="/user-dashboard" element={withTransition(<UserDashboard />)} />
+        <Route path="/admin-dashboard" element={withTransition(<AdminDashboard />)} />
+        <Route path="/admin-signup" element={withTransition(<AdminSignup />)} />
+        <Route path="/admin-signup-form" element={withTransition(<AdminSignupForm />)} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 function App() {
   return (
@@ -55,24 +91,7 @@ function App() {
               <Navbar />
             </header>
             <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/competitions" element={<Competitions />} />
-                <Route path="/sponsors" element={<Sponsors />} />
-                <Route path="/team" element={<Team />} />
-                <Route path="/join" element={<Join />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/user-signup" element={<UserSignup />} />
-                <Route path="/privacy" element={<PrivacyPolicy />} />
-                <Route path="/terms" element={<TermsOfService />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/user-dashboard" element={<UserDashboard />} />
-                <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                <Route path="/admin-signup" element={<AdminSignup />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
+              <AnimatedRoutes />
             </main>
             <Footer />
           </div>
@@ -83,4 +102,3 @@ function App() {
 }
 
 export default App
-

@@ -1,0 +1,261 @@
+.admin-signup.signup-page {
+    padding: 6rem 2rem;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.admin-signup .signup-container {
+    width: 100%;
+    max-width: 900px;
+    animation: fadeInAdmin 0.5s ease forwards;
+}
+
+.admin-signup .signup-card {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 4rem;
+    border-radius: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-signup .signup-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.admin-signup .signup-header h1 {
+    font-size: 4rem;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -2px;
+}
+
+.admin-signup .signup-header p {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* Form Styling */
+.admin-signup .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.admin-signup .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.admin-signup .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.admin-signup .form-group--full {
+    grid-column: span 2;
+}
+
+.admin-signup .signup-form label {
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.admin-signup .signup-form input,
+.admin-signup .signup-form select {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.2rem 1.5rem;
+    border-radius: 34px;
+    color: #fff;
+    font-size: 1.3rem;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.admin-signup .signup-form input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.admin-signup .signup-form input:focus,
+.admin-signup .signup-form select:focus {
+    outline: none;
+    border-color: rgba(82, 39, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Styled Read-only / Disabled state for dropdowns */
+.admin-signup .searchable-dropdown.read-only label {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.admin-signup .searchable-dropdown.read-only .read-only-input {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.2) !important;
+    font-size: 1.5rem !important;
+    padding: 1.2rem 1.5rem !important;
+    border-radius: 34px;
+    cursor: not-allowed;
+}
+
+/* Profile Upload Section */
+.admin-signup .profile-upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.admin-signup .upload-dropzone {
+    width: 100%;
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 9rem;
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.admin-signup .upload-dropzone:hover,
+.admin-signup .upload-dropzone.dragging {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(82, 39, 255, 0.5);
+}
+
+.admin-signup .upload-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+}
+
+.admin-signup .upload-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.admin-signup .upload-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.admin-signup .upload-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-signup .upload-text p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-signup .upload-text p span {
+    color: #fff;
+    font-weight: 600;
+}
+
+.admin-signup .upload-hint {
+    font-size: 1rem !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    margin-top: 0.25rem !important;
+}
+
+/* Footer & Buttons */
+.admin-signup .signup-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.admin-signup .signup-btn {
+    width: 100%;
+    max-width: 400px;
+    padding: 1.5rem;
+    border-radius: 99px;
+    border: none;
+    background: #fff;
+    color: #000;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin-signup .signup-btn:active {
+    transform: scale(0.98);
+}
+
+.admin-signup .signup-btn.admin-btn {
+    background: #5227FF;
+    color: #fff;
+}
+
+
+.admin-signup .signup-btn:active {
+    transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes fadeInAdmin {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-signup .signup-card {
+        padding: 2.5rem;
+    }
+
+    .admin-signup .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-signup .form-group--full {
+        grid-column: span 1;
+    }
+
+    .admin-signup .signup-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .admin-signup .upload-dropzone {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+        border-radius: 34px;
+    }
+}

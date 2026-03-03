@@ -8,9 +8,9 @@ import './admin-dashboard.css'
 
 function AdminDashboard() {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-    const [isAllEventsModalOpen, setIsAllEventsModalOpen] = useState(false)
+    const [isAllWorkshopsModalOpen, setIsAllWorkshopsModalOpen] = useState(false)
     const [isClosing, setIsClosing] = useState(false)
-    const [isEventsClosing, setIsEventsClosing] = useState(false)
+    const [isWorkshopsClosing, setIsWorkshopsClosing] = useState(false)
     const [isDragging, setIsDragging] = useState(false)
     const [imageToCrop, setImageToCrop] = useState<string | null>(null)
 
@@ -18,7 +18,7 @@ function AdminDashboard() {
     const [admin, setAdmin] = useState({
         firstName: "Admin",
         lastName: "User",
-        zKey: "ADM-NIR-0001",
+        nCode: "ADM-NIR-0001",
         email: "admin@nirmaan.in",
         phone: "+91 98765 43210",
         dob: "1990-01-01",
@@ -28,7 +28,7 @@ function AdminDashboard() {
         yearOfStudy: "Passed Out",
         completionYear: "2012",
         avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin",
-        registeredEvents: [
+        registeredWorkshops: [
             { id: 1, name: "Robo-Sumo", category: "Technical", status: "Active", date: "March 15, 2026" },
             { id: 2, name: "Code Sprint", category: "Technical", status: "Active", date: "March 16, 2026" },
             { id: 3, name: "Poster Making", category: "Creative", status: "Active", date: "March 17, 2026" },
@@ -51,11 +51,11 @@ function AdminDashboard() {
         }, 300)
     }
 
-    const handleEventsClose = () => {
-        setIsEventsClosing(true)
+    const handleWorkshopsClose = () => {
+        setIsWorkshopsClosing(true)
         setTimeout(() => {
-            setIsAllEventsModalOpen(false)
-            setIsEventsClosing(false)
+            setIsAllWorkshopsModalOpen(false)
+            setIsWorkshopsClosing(false)
         }, 300)
     }
 
@@ -101,60 +101,60 @@ function AdminDashboard() {
     }
 
     return (
-        <div className="dashboard-page dash-admin">
-            <div className="dashboard-container">
+        <div className="admin-dashboard-page">
+            <div className="admin-dashboard-container">
                 {/* Header Section */}
-                <header className="dashboard-header">
-                    <div className="user-profile">
-                        <div className="user-avatar">
+                <header className="admin-dashboard-header">
+                    <div className="admin-dashboard-profile">
+                        <div className="admin-dashboard-avatar">
                             <img src={admin.avatar} alt={`${admin.firstName} ${admin.lastName}`} />
                         </div>
-                        <div className="user-info">
-                            <h1 className="user-name">Admin Portal: {admin.firstName} {admin.lastName}</h1>
-                            <p className="user-id">Admin-Key: <span>{admin.zKey}</span></p>
+                        <div className="admin-dashboard-info">
+                            <h1 className="admin-dashboard-name">Admin Portal: {admin.firstName} {admin.lastName}</h1>
+                            <p className="admin-dashboard-id">N-Code: <span>{admin.nCode}</span></p>
                         </div>
                     </div>
-                    <div className="header-actions">
-                        <button className="edit-profile-btn" onClick={() => setIsEditModalOpen(true)}>Edit Profile</button>
+                    <div className="admin-dashboard-header-actions">
+                        <button className="admin-edit-profile-btn" onClick={() => setIsEditModalOpen(true)}>Edit Profile</button>
                     </div>
                 </header>
 
 
                 {/* Main Content Grid */}
-                <div className="dashboard-grid">
+                <div className="admin-dashboard-grid">
                     {/* Admin Actions Section */}
-                    <section className="dashboard-section actions-section">
-                        <div className="section-header">
+                    <section className="admin-dashboard-section admin-actions-section">
+                        <div className="admin-section-header">
                             <h2>Admin Controls</h2>
                         </div>
-                        <div className="action-buttons">
-                            <button className="action-btn">Manage Registrations</button>
-                            <button className="action-btn">Event Analytics</button>
-                            <button className="action-btn">Broadcast Notice</button>
-                            <button className="action-btn action-btn--secondary">Database Access</button>
+                        <div className="admin-action-buttons">
+                            <button className="admin-action-btn">Manage Registrations</button>
+                            <button className="admin-action-btn">Workshop Analytics</button>
+                            <button className="admin-action-btn">Broadcast Notice</button>
+                            <button className="admin-action-btn admin-action-btn--secondary">Database Access</button>
                         </div>
                     </section>
 
                     {/* Active Monitoring Section */}
-                    <section className="dashboard-section events-section">
-                        <div className="section-header">
-                            <h2>Event Oversight</h2>
-                            <button className="view-all-btn" onClick={() => setIsAllEventsModalOpen(true)}>Monitor All</button>
+                    <section className="admin-dashboard-section admin-events-section">
+                        <div className="admin-section-header">
+                            <h2>Workshop Oversight</h2>
+                            <button className="admin-view-all-btn" onClick={() => setIsAllWorkshopsModalOpen(true)}>Monitor All</button>
                         </div>
-                        <div className="events-list">
-                            {admin.registeredEvents.slice(0, 3).map(event => (
-                                <div key={event.id} className="event-item">
-                                    <div className="event-info">
-                                        <h3>{event.name}</h3>
-                                        <p>{event.category} • {event.date}</p>
+                        <div className="admin-workshops-list">
+                            {admin.registeredWorkshops.slice(0, 3).map(workshop => (
+                                <div key={workshop.id} className="admin-workshop-item">
+                                    <div className="admin-workshop-info">
+                                        <h3>{workshop.name}</h3>
+                                        <p>{workshop.category} • {workshop.date}</p>
                                     </div>
-                                    <div className={`event-status status-${event.status.toLowerCase().replace(' ', '-')}`}>
-                                        {event.status}
+                                    <div className={`admin-workshop-status admin-status-${workshop.status.toLowerCase().replace(' ', '-')}`}>
+                                        {workshop.status}
                                     </div>
                                 </div>
                             ))}
-                            {admin.registeredEvents.length > 3 && (
-                                <p className="more-events-hint">Monitoring {admin.registeredEvents.length - 3} additional events</p>
+                            {admin.registeredWorkshops.length > 3 && (
+                                <p className="admin-more-workshops-hint">Monitoring {admin.registeredWorkshops.length - 3} additional workshops</p>
                             )}
                         </div>
                     </section>
@@ -163,29 +163,29 @@ function AdminDashboard() {
 
             {/* Edit Profile Modal */}
             {isEditModalOpen && (
-                <div className={`modal-overlay ${isClosing ? 'closing' : ''}`} onClick={handleClose}>
-                    <div className="modal-card modal-card--large" onClick={e => e.stopPropagation()}>
-                        <div className="modal-header">
+                <div className={`admin-modal-overlay ${isClosing ? 'admin-closing' : ''}`} onClick={handleClose}>
+                    <div className="admin-modal-card admin-modal-card--large" onClick={e => e.stopPropagation()}>
+                        <div className="admin-modal-header">
                             <h2>Edit Admin Profile</h2>
-                            <button className="close-btn" onClick={handleClose}>&times;</button>
+                            <button className="admin-close-btn" onClick={handleClose}>&times;</button>
                         </div>
-                        <form className="edit-form" onSubmit={handleEditSubmit}>
+                        <form className="admin-edit-form" onSubmit={handleEditSubmit}>
                             {/* Profile Picture Upload Section */}
-                            <div className="profile-upload-section">
+                            <div className="admin-profile-upload-section">
                                 <label>Profile Picture</label>
                                 <div
-                                    className={`upload-dropzone ${isDragging ? 'dragging' : ''}`}
+                                    className={`admin-upload-dropzone ${isDragging ? 'admin-dragging' : ''}`}
                                     onDragOver={handleDragOver}
                                     onDragLeave={handleDragLeave}
                                     onDrop={handleDrop}
                                     onClick={() => document.getElementById('avatar-input')?.click()}
                                 >
-                                    <div className="upload-preview">
+                                    <div className="admin-upload-preview">
                                         <img src={editForm.avatar} alt="Preview" />
                                     </div>
-                                    <div className="upload-text">
+                                    <div className="admin-upload-text">
                                         <p><span>Click to upload</span> or drag and drop</p>
-                                        <p className="upload-hint">SVG, PNG, JPG (max. 1MB)</p>
+                                        <p className="admin-upload-hint">SVG, PNG, JPG (max. 1MB)</p>
                                     </div>
                                     <input
                                         type="file"
@@ -202,24 +202,24 @@ function AdminDashboard() {
                                 </div>
                             </div>
 
-                            <div className="form-grid form-grid--3-col">
-                                <div className="form-group">
+                            <div className="admin-form-grid admin-form-grid--3-col">
+                                <div className="admin-form-group">
                                     <label>First Name</label>
-                                    <input type="text" value={editForm.firstName} readOnly className="read-only-input" />
+                                    <input type="text" value={editForm.firstName} readOnly className="admin-read-only-input" />
                                 </div>
-                                <div className="form-group">
+                                <div className="admin-form-group">
                                     <label>Last Name</label>
-                                    <input type="text" value={editForm.lastName} readOnly className="read-only-input" />
+                                    <input type="text" value={editForm.lastName} readOnly className="admin-read-only-input" />
                                 </div>
-                                <div className="form-group">
+                                <div className="admin-form-group">
                                     <label>Email Address</label>
-                                    <input type="email" value={editForm.email} readOnly className="read-only-input" />
+                                    <input type="email" value={editForm.email} readOnly className="admin-read-only-input" />
                                 </div>
-                                <div className="form-group">
+                                <div className="admin-form-group">
                                     <label>Mobile Number</label>
-                                    <input type="text" value={editForm.phone} readOnly className="read-only-input" />
+                                    <input type="text" value={editForm.phone} readOnly className="admin-read-only-input" />
                                 </div>
-                                <div className="form-group">
+                                <div className="admin-form-group">
                                     <Calendar
                                         value={editForm.dob}
                                         onChange={(val: string) => handleDropdownChange('dob', val)}
@@ -227,7 +227,7 @@ function AdminDashboard() {
                                         readOnly
                                     />
                                 </div>
-                                <div className="form-group">
+                                <div className="admin-form-group">
                                     <SearchableDropdown
                                         options={['Male', 'Female', 'Other']}
                                         value={editForm.sex}
@@ -238,7 +238,7 @@ function AdminDashboard() {
                                         allowManual={false}
                                     />
                                 </div>
-                                <div className="form-group form-group--span-2">
+                                <div className="admin-form-group admin-form-group--span-2">
                                     <SearchableDropdown
                                         options={[...colleges]}
                                         value={editForm.college}
@@ -248,11 +248,11 @@ function AdminDashboard() {
                                         readOnly
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label>Admin-Key</label>
-                                    <input type="text" value={editForm.zKey} readOnly className="read-only-input" />
+                                <div className="admin-form-group">
+                                    <label>Admin N-Code</label>
+                                    <input type="text" value={editForm.nCode} readOnly className="admin-read-only-input" />
                                 </div>
-                                <div className="form-group">
+                                <div className="admin-form-group">
                                     <SearchableDropdown
                                         options={[...majors]}
                                         value={editForm.major}
@@ -262,7 +262,7 @@ function AdminDashboard() {
                                         required
                                     />
                                 </div>
-                                <div className="form-group">
+                                <div className="admin-form-group">
                                     <SearchableDropdown
                                         options={studyYears}
                                         value={editForm.yearOfStudy}
@@ -273,7 +273,7 @@ function AdminDashboard() {
                                         allowManual={false}
                                     />
                                 </div>
-                                <div className="form-group">
+                                <div className="admin-form-group">
                                     <SearchableDropdown
                                         options={completionYears}
                                         value={editForm.completionYear}
@@ -286,41 +286,41 @@ function AdminDashboard() {
                                 </div>
                             </div>
 
-                            <div className="modal-footer">
-                                <button type="button" className="cancel-btn" onClick={handleClose}>Cancel</button>
-                                <button type="submit" className="save-btn">Save Changes</button>
+                            <div className="admin-modal-footer">
+                                <button type="button" className="admin-cancel-btn" onClick={handleClose}>Cancel</button>
+                                <button type="submit" className="admin-save-btn">Save Changes</button>
                             </div>
                         </form>
                     </div>
                 </div>
             )}
 
-            {/* All Events Oversight Modal */}
-            {isAllEventsModalOpen && (
-                <div className={`modal-overlay ${isEventsClosing ? 'closing' : ''}`} onClick={handleEventsClose}>
-                    <div className="modal-card modal-card--large" onClick={e => e.stopPropagation()}>
-                        <div className="modal-header">
-                            <h2>All Event Overviews</h2>
-                            <button className="close-btn" onClick={handleEventsClose}>&times;</button>
+            {/* All Workshops Oversight Modal */}
+            {isAllWorkshopsModalOpen && (
+                <div className={`admin-modal-overlay ${isWorkshopsClosing ? 'admin-closing' : ''}`} onClick={handleWorkshopsClose}>
+                    <div className="admin-modal-card admin-modal-card--large" onClick={e => e.stopPropagation()}>
+                        <div className="admin-modal-header">
+                            <h2>All Workshop Overviews</h2>
+                            <button className="admin-close-btn" onClick={handleWorkshopsClose}>&times;</button>
                         </div>
-                        <div className="all-events-grid">
-                            {admin.registeredEvents.map(event => (
-                                <div key={event.id} className="event-card-premium">
-                                    <div className="event-card-header">
-                                        <span className="event-category-tag">{event.category}</span>
-                                        <span className={`event-status-tag status-${event.status.toLowerCase().replace(' ', '-')}`}>
-                                            {event.status}
+                        <div className="admin-all-workshops-grid">
+                            {admin.registeredWorkshops.map(workshop => (
+                                <div key={workshop.id} className="admin-workshop-card-premium">
+                                    <div className="admin-workshop-card-header">
+                                        <span className="admin-workshop-category-tag">{workshop.category}</span>
+                                        <span className={`admin-workshop-status-tag admin-status-${workshop.status.toLowerCase().replace(' ', '-')}`}>
+                                            {workshop.status}
                                         </span>
                                     </div>
-                                    <div className="event-card-content">
-                                        <h3>{event.name}</h3>
-                                        <p className="event-date">
+                                    <div className="admin-workshop-card-content">
+                                        <h3>{workshop.name}</h3>
+                                        <p className="admin-workshop-date">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                            {event.date}
+                                            {workshop.date}
                                         </p>
                                     </div>
-                                    <div className="event-card-footer">
-                                        <button className="event-action-btn">Manage Event</button>
+                                    <div className="admin-workshop-card-footer">
+                                        <button className="admin-workshop-action-btn">Manage Workshop</button>
                                     </div>
                                 </div>
                             ))}

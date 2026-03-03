@@ -1,4 +1,4 @@
-.dashboard-page {
+.admin-dashboard-page {
     padding: 4rem 2rem 4rem;
     width: 100%;
     min-height: 100vh;
@@ -6,7 +6,7 @@
     justify-content: center;
 }
 
-.dashboard-container {
+.admin-dashboard-container {
     width: 100%;
     max-width: 1200px;
     display: flex;
@@ -15,7 +15,7 @@
 }
 
 /* Header Section */
-.dashboard-header {
+.admin-dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,16 +23,16 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 2.5rem;
-    border-radius: 7rem;
+    border-radius: 3rem;
 }
 
-.user-profile {
+.admin-dashboard-profile {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.user-avatar {
+.admin-dashboard-avatar {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -41,32 +41,32 @@
     border: none;
 }
 
-.user-avatar img {
+.admin-dashboard-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.user-name {
+.admin-dashboard-name {
     font-size: 2.5rem;
     color: #fff;
     margin: 0 0 0.25rem 0;
     letter-spacing: -1px;
 }
 
-.user-id {
+.admin-dashboard-id {
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.6);
     margin: 0;
 }
 
-.user-id span {
+.admin-dashboard-id span {
     color: #2eff27;
     font-weight: 600;
     margin-left: 0.5rem;
 }
 
-.edit-profile-btn {
+.admin-edit-profile-btn {
     background: rgba(255, 255, 255, 0.05);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -77,18 +77,18 @@
     transition: all 0.2s ease;
 }
 
-.edit-profile-btn:hover {
+.admin-edit-profile-btn:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
 /* Stats Section */
-.dashboard-stats {
+.admin-dashboard-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
-.stat-card {
+.admin-stat-card {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(20px);
     padding: 1.5rem 2rem;
@@ -99,27 +99,27 @@
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.stat-label {
+.admin-stat-label {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.stat-value {
+.admin-stat-value {
     font-size: 2.5rem;
     font-weight: 600;
     color: #fff;
 }
 
 /* Dashboard Grid */
-.dashboard-grid {
+.admin-dashboard-grid {
     display: grid;
     grid-template-columns: 1.2fr 2fr;
     gap: 1.5rem;
 }
 
-.dashboard-section {
+.admin-dashboard-section {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(20px);
     padding: 2rem;
@@ -127,20 +127,20 @@
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.section-header {
+.admin-section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
 
-.section-header h2 {
+.admin-section-header h2 {
     font-size: 1.6rem;
     color: #fff;
     margin: 0;
 }
 
-.view-all-btn {
+.admin-view-all-btn {
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.5);
@@ -149,18 +149,18 @@
     transition: color 0.2s ease;
 }
 
-.view-all-btn:hover {
+.admin-view-all-btn:hover {
     color: #fff;
 }
 
-/* Event List Styling */
-.events-list {
+/* Workshop List Styling */
+.admin-workshops-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.event-item {
+.admin-workshop-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -171,23 +171,23 @@
     cursor: pointer;
 }
 
-.event-item:hover {
+.admin-workshop-item:hover {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.event-info h3 {
+.admin-workshop-info h3 {
     font-size: 1.2rem;
     color: #fff;
     margin: 0 0 0.25rem 0;
 }
 
-.event-info p {
+.admin-workshop-info p {
     font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.5);
     margin: 0;
 }
 
-.event-status {
+.admin-workshop-status {
     padding: 0.5rem 1rem;
     border-radius: 12px;
     font-size: 0.85rem;
@@ -195,25 +195,24 @@
     text-transform: uppercase;
 }
 
-.status-confirmed,
-.status-active {
+.admin-status-confirmed {
     background: rgba(80, 249, 97, 0.1);
     color: rgb(80, 249, 97);
 }
 
-.status-pending-payment {
+.admin-status-pending-payment {
     background: rgba(251, 188, 5, 0.1);
     color: rgb(251, 188, 5);
 }
 
 /* Action Buttons Section */
-.action-buttons {
+.admin-action-buttons {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
 }
 
-.action-btn {
+.admin-action-btn {
     padding: 1.2rem;
     border-radius: 54px;
     border: none;
@@ -225,18 +224,18 @@
     transition: all 0.2s ease;
 }
 
-.action-btn:hover {
+.admin-action-btn:hover {
     background: #f0f0f0;
 }
 
-.action-btn--secondary {
-    background: rgba(82, 39, 255, 0.2);
-    color: #5227FF;
-    border: 1px solid rgba(82, 39, 255, 0.2);
+.admin-action-btn--secondary {
+    background: rgba(88, 101, 242, 0.2);
+    color: #5865F2;
+    border: 1px solid rgba(88, 101, 242, 0.2);
 }
 
-.action-btn--secondary:hover {
-    background: rgba(82, 39, 255, 0.3);
+.admin-action-btn--secondary:hover {
+    background: rgba(88, 101, 242, 0.3);
 }
 
 /* Active State for all buttons */
@@ -246,34 +245,34 @@ button:active {
 
 /* Responsive Dashboard */
 @media (max-width: 1024px) {
-    .dashboard-grid {
+    .admin-dashboard-grid {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 768px) {
-    .dashboard-header {
+    .admin-dashboard-header {
         flex-direction: column;
         text-align: center;
         gap: 1.5rem;
     }
 
-    .user-profile {
+    .admin-dashboard-profile {
         flex-direction: column;
         gap: 1rem;
     }
 
-    .dashboard-stats {
+    .admin-dashboard-stats {
         grid-template-columns: 1fr;
     }
 
-    .user-name {
+    .admin-dashboard-name {
         font-size: 2rem;
     }
 }
 
 /* Modal Styling */
-.modal-overlay {
+.admin-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -286,15 +285,15 @@ button:active {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    animation: fadeIn 0.3s ease forwards;
+    animation: adminFadeIn 0.3s ease forwards;
     padding: 2rem;
 }
 
-.modal-overlay.closing {
-    animation: fadeOut 0.3s ease forwards;
+.admin-modal-overlay.admin-closing {
+    animation: adminFadeOut 0.3s ease forwards;
 }
 
-.modal-card {
+.admin-modal-card {
     background: rgba(0, 0, 0, 0.90);
     width: 100%;
     max-width: 600px;
@@ -302,20 +301,20 @@ button:active {
     padding: 3rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     border: none;
-    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: adminSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     max-height: 90vh;
     overflow-y: auto;
 }
 
-.modal-card--large {
+.admin-modal-card--large {
     max-width: 900px;
 }
 
-.modal-overlay.closing .modal-card {
-    animation: slideDown 0.3s ease forwards;
+.admin-modal-overlay.admin-closing .admin-modal-card {
+    animation: adminSlideDown 0.3s ease forwards;
 }
 
-@keyframes fadeIn {
+@keyframes adminFadeIn {
     from {
         opacity: 0;
     }
@@ -325,7 +324,7 @@ button:active {
     }
 }
 
-@keyframes fadeOut {
+@keyframes adminFadeOut {
     from {
         opacity: 1;
     }
@@ -335,7 +334,7 @@ button:active {
     }
 }
 
-@keyframes slideUp {
+@keyframes adminSlideUp {
     from {
         opacity: 0;
         transform: translateY(30px) scale(0.95);
@@ -347,7 +346,7 @@ button:active {
     }
 }
 
-@keyframes slideDown {
+@keyframes adminSlideDown {
     from {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -359,20 +358,20 @@ button:active {
     }
 }
 
-.modal-header {
+.admin-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
 
-.modal-header h2 {
+.admin-modal-header h2 {
     font-size: 1.8rem;
     color: #fff;
     margin: 0;
 }
 
-.close-btn {
+.admin-close-btn {
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.9);
@@ -381,47 +380,47 @@ button:active {
     transition: color 0.2s ease;
 }
 
-.close-btn:hover {
+.admin-close-btn:hover {
     color: #fff;
 }
 
 /* Edit Form Layout */
-.edit-form {
+.admin-edit-form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.form-grid {
+.admin-form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
-.form-grid--3-col {
+.admin-form-grid--3-col {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.form-group {
+.admin-form-group {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
 }
 
-.form-group--span-2 {
+.admin-form-group--span-2 {
     grid-column: span 2;
 }
 
-.edit-form label {
+.admin-edit-form label {
     font-size: 1rem;
-    color: #5227FF;
+    color: rgb(94, 255, 91);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.edit-form input,
-.edit-form select {
+.admin-edit-form input,
+.admin-edit-form select {
     background: rgba(255, 255, 255, 0);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1rem 1.25rem;
@@ -432,14 +431,14 @@ button:active {
     font-family: inherit;
 }
 
-.edit-form input:focus,
-.edit-form select:focus {
+.admin-edit-form input:focus,
+.admin-edit-form select:focus {
     outline: none;
     border-color: rgba(82, 39, 255, 0.5);
     background: rgba(255, 255, 255, 0.01);
 }
 
-.read-only-input {
+.admin-read-only-input {
     background: transparent !important;
     border: none !important;
     padding-left: 0 !important;
@@ -449,13 +448,13 @@ button:active {
 }
 
 /* Profile Upload Section */
-.profile-upload-section {
+.admin-profile-upload-section {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.upload-dropzone {
+.admin-upload-dropzone {
     border: 2px dashed rgba(255, 255, 255, 0.15);
     border-radius: 9rem;
     padding: 2rem;
@@ -467,13 +466,13 @@ button:active {
     background: rgba(255, 255, 255, 0);
 }
 
-.upload-dropzone:hover,
-.upload-dropzone.dragging {
+.admin-upload-dropzone:hover,
+.admin-upload-dropzone.admin-dragging {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(82, 39, 255, 0.5);
 }
 
-.upload-preview {
+.admin-upload-preview {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -481,38 +480,38 @@ button:active {
     flex-shrink: 0;
 }
 
-.upload-preview img {
+.admin-upload-preview img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.upload-text p {
+.admin-upload-text p {
     margin: 0;
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.6);
 }
 
-.upload-text p span {
+.admin-upload-text p span {
     color: #fff;
     font-weight: 600;
 }
 
-.upload-hint {
+.admin-upload-hint {
     font-size: 0.85rem !important;
     color: rgba(255, 255, 255, 0.4) !important;
     margin-top: 0.25rem !important;
 }
 
 /* Modal Footer */
-.modal-footer {
+.admin-modal-footer {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
     margin-top: 1rem;
 }
 
-.cancel-btn {
+.admin-cancel-btn {
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
@@ -523,11 +522,11 @@ button:active {
     transition: all 0.2s ease;
 }
 
-.cancel-btn:hover {
+.admin-cancel-btn:hover {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.save-btn {
+.admin-save-btn {
     background: #fff;
     color: #000;
     border: none;
@@ -538,48 +537,48 @@ button:active {
     transition: all 0.2s ease;
 }
 
-.save-btn:hover {
+.admin-save-btn:hover {
     background: #f0f0f0;
 }
 
 /* Modal Responsive */
 @media (max-width: 900px) {
-    .form-grid--3-col {
+    .admin-form-grid--3-col {
         grid-template-columns: 1fr 1fr;
     }
 
-    .form-group--span-2 {
+    .admin-form-group--span-2 {
         grid-column: span 1;
     }
 }
 
 @media (max-width: 640px) {
 
-    .form-grid,
-    .form-grid--3-col {
+    .admin-form-grid,
+    .admin-form-grid--3-col {
         grid-template-columns: 1fr;
     }
 
-    .modal-card {
+    .admin-modal-card {
         padding: 2rem;
     }
 
-    .upload-dropzone {
+    .admin-upload-dropzone {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
     }
 }
 
-/* All Events Modal Styles */
-.all-events-grid {
+/* All Workshops Modal Styles */
+.admin-all-workshops-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
     padding: 0.5rem;
 }
 
-.event-card-premium {
+.admin-workshop-card-premium {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 24px;
@@ -590,15 +589,15 @@ button:active {
     transition: all 0.3s ease;
 }
 
-.event-card-header {
+.admin-workshop-card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.event-category-tag {
-    background: rgba(82, 39, 255, 0.1);
-    color: #5227FF;
+.admin-workshop-category-tag {
+    background: rgba(230, 91, 255, 0.1);
+    color: rgb(230, 91, 255);
     padding: 0.4rem 0.8rem;
     border-radius: 12px;
     font-size: 0.75rem;
@@ -607,21 +606,21 @@ button:active {
     letter-spacing: 0.5px;
 }
 
-.event-status-tag {
+.admin-workshop-status-tag {
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.4rem 0.8rem;
     border-radius: 12px;
 }
 
-.event-card-content h3 {
+.admin-workshop-card-content h3 {
     margin: 0;
     font-size: 1.25rem;
     color: #fff;
     margin-bottom: 0.5rem;
 }
 
-.event-date {
+.admin-workshop-date {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -630,16 +629,16 @@ button:active {
     margin: 0;
 }
 
-.event-date svg {
+.admin-workshop-date svg {
     width: 14px;
     height: 14px;
 }
 
-.event-card-footer {
+.admin-workshop-card-footer {
     margin-top: auto;
 }
 
-.event-action-btn {
+.admin-workshop-action-btn {
     width: 100%;
     padding: 0.8rem;
     background: rgba(255, 255, 255, 0.05);
@@ -651,7 +650,7 @@ button:active {
     transition: all 0.2s ease;
 }
 
-.more-events-hint {
+.admin-more-workshops-hint {
     text-align: center;
     color: rgba(255, 255, 255, 0.4);
     font-size: 0.9rem;
@@ -661,7 +660,7 @@ button:active {
 }
 
 @media (max-width: 640px) {
-    .all-events-grid {
+    .admin-all-workshops-grid {
         grid-template-columns: 1fr;
     }
 }

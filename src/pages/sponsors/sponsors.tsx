@@ -45,6 +45,7 @@ function Sponsors() {
     return (
         <main className="sponsors-page">
             <header className="sponsors-header">
+                <div className="header-glow"></div>
                 <h1>Our Partners</h1>
                 <p>Building the future together. We are proud to be supported by world-class organizations that share our vision for innovation and excellence.</p>
             </header>
@@ -83,7 +84,7 @@ function Sponsors() {
                 <div className="cta-content">
                     <h2>Interested in Partnering?</h2>
                     <p>Join us in creating an unforgettable experience for thousands of students and technology enthusiasts.</p>
-                    <a href="/contact" className="become-sponsor-btn">Partner With Us</a>
+                    <a href="/website-nirmaan/contact" className="become-sponsor-btn">Partner With Us</a>
                 </div>
             </section>
         </main>

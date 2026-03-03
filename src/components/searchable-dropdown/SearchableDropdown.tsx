@@ -98,6 +98,16 @@ const SearchableDropdown = ({
                     setActiveIndex(prev => (prev - 1 + totalItems) % totalItems)
                 }
                 break
+            case ' ':
+                if (activeIndex !== -1) {
+                    e.preventDefault()
+                    if (activeIndex < filteredOptions.length) {
+                        handleSelect(filteredOptions[activeIndex])
+                    } else if (allowManual) {
+                        handleSelect(search || value)
+                    }
+                }
+                break
             case 'Enter':
                 e.preventDefault()
                 if (activeIndex !== -1) {

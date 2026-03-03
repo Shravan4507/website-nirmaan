@@ -5,7 +5,6 @@ interface CalendarProps {
     value: string // YYYY-MM-DD
     onChange: (value: string) => void
     label?: string
-    placeholder?: string
     required?: boolean
     readOnly?: boolean
 }
@@ -14,7 +13,6 @@ const Calendar = ({
     value,
     onChange,
     label,
-    placeholder = "Select Date",
     required = false,
     readOnly = false
 }: CalendarProps) => {
@@ -22,6 +20,7 @@ const Calendar = ({
     const [viewDate, setViewDate] = useState(value ? new Date(value) : new Date())
     const [viewMode, setViewMode] = useState<'days' | 'months' | 'years'>('days')
     const dropdownRef = useRef<HTMLDivElement>(null)
+    const [inputValue, setInputValue] = useState('')
 
     const months = [
         "January", "February", "March", "April", "May", "June",
@@ -30,9 +29,22 @@ const Calendar = ({
 
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
-    // Generate years range (e.g., from 1950 to currentYear + 10)
     const currentYear = new Date().getFullYear()
     const years = Array.from({ length: 100 }, (_, i) => currentYear - 80 + i)
+
+    const formatDisplayDate = (val: string) => {
+        if (!val) return ""
+        const parts = val.split('-')
+        if (parts.length !== 3) return ""
+        const [year, month, day] = parts
+        return `${day}/${month}/${year}`
+    }
+
+    useEffect(() => {
+        if (value) {
+            setInputValue(formatDisplayDate(value))
+        }
+    }, [value])
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -53,6 +65,33 @@ const Calendar = ({
         return new Date(year, month, 1).getDay()
     }
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let val = e.target.value.replace(/\D/g, '') // Integers only
+        let formatted = ''
+
+        if (val.length > 0) {
+            formatted = val.slice(0, 2)
+            if (val.length > 2) {
+                formatted += '/' + val.slice(2, 4)
+                if (val.length > 4) {
+                    formatted += '/' + val.slice(4, 8)
+                }
+            }
+        }
+
+        setInputValue(formatted)
+
+        // If complete date is typed, notify parent
+        if (formatted.length === 10) {
+            const [d, m, y] = formatted.split('/')
+            const iso = `${y}-${m}-${d}`
+            const dateObj = new Date(iso)
+            if (!isNaN(dateObj.getTime())) {
+                onChange(iso)
+                setViewDate(dateObj)
+            }
+        }
+    }
 
     const handleDateSelect = (day: number) => {
         const selectedDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), day)
@@ -64,12 +103,14 @@ const Calendar = ({
     }
 
     const handleMonthSelect = (monthIndex: number) => {
-        setViewDate(new Date(viewDate.getFullYear(), monthIndex, 1))
+        const newDate = new Date(viewDate.getFullYear(), monthIndex, 1)
+        setViewDate(newDate)
         setViewMode('days')
     }
 
     const handleYearSelect = (year: number) => {
-        setViewDate(new Date(year, viewDate.getMonth(), 1))
+        const newDate = new Date(year, viewDate.getMonth(), 1)
+        setViewDate(newDate)
         setViewMode('days')
     }
 
@@ -98,18 +139,11 @@ const Calendar = ({
         return days
     }
 
-    const formatDisplayDate = (val: string) => {
-        if (!val) return ""
-        const d = new Date(val)
-        if (isNaN(d.getTime())) return ""
-        return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-    }
-
     if (readOnly) {
         return (
             <div className="calendar-container read-only">
                 {label && <label>{label}</label>}
-                <input type="text" value={formatDisplayDate(value)} readOnly className="read-only-input" />
+                <input type="text" value={inputValue} readOnly className="read-only-input" />
             </div>
         )
     }
@@ -118,20 +152,26 @@ const Calendar = ({
         <div className="calendar-container" ref={dropdownRef}>
             {label && <label>{label}</label>}
             <div className={`dropdown-container ${isOpen ? 'is-open' : ''}`}>
-                <div className="dropdown-trigger-wrapper" onClick={() => setIsOpen(!isOpen)}>
+                <div className="dropdown-trigger-wrapper">
                     <input
                         type="text"
                         className="dropdown-trigger-input"
-                        value={formatDisplayDate(value)}
-                        placeholder={placeholder}
-                        readOnly
+                        value={inputValue}
+                        placeholder="DD/MM/YYYY"
+                        onChange={handleInputChange}
+                        maxLength={10}
                     />
-                    <svg className={`calendar-icon ${isOpen ? 'active' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
+                    <div 
+                        className="calendar-icon-wrapper"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        <svg className={`calendar-icon ${isOpen ? 'active' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
                 </div>
 
                 {isOpen && (

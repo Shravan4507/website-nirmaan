@@ -1,11 +1,53 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { auth, db } from '../../config/firebase'
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
+import { useToast } from '../toast/Toast'
 import './login.css'
 
 const nirmaanLogo = `${import.meta.env.BASE_URL}assets/logos/Logo-2-White.png`
 
 function Login() {
-    const handleGoogleLogin = () => {
-        // Logic for Google Login will go here
-        console.log('Google Login Clicked')
+    const navigate = useNavigate()
+    const { showToast } = useToast()
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                navigate('/user-dashboard')
+            }
+        })
+        return () => unsubscribe()
+    }, [navigate])
+
+    const handleGoogleLogin = async () => {
+        try {
+            const provider = new GoogleAuthProvider()
+            const result = await signInWithPopup(auth, provider)
+            const user = result.user
+
+            // Check if user exists in Firestore
+            const userDoc = await getDoc(doc(db, 'users', user.uid))
+
+            if (userDoc.exists()) {
+                showToast('Welcome Back!', 'Logging you in...', 'success')
+                navigate('/user-dashboard')
+            } else {
+                showToast('Welcome!', 'Please complete your registration.', 'info')
+                // Navigate to signup with initial data
+                navigate('/user-signup', { 
+                    state: { 
+                        email: user.email,
+                        displayName: user.displayName,
+                        photoURL: user.photoURL
+                    } 
+                })
+            }
+        } catch (error: any) {
+            console.error('Login error:', error)
+            showToast('Login Failed', error.message || 'Something went wrong', 'error')
+        }
     }
 
     return (

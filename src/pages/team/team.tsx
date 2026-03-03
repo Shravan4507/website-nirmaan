@@ -134,6 +134,7 @@ function Team() {
     return (
         <main className="team-page">
             <header className="team-header">
+                <div className="header-glow"></div>
                 <h1>The Visionaries</h1>
                 <p>Meet the dedicated team working behind the scenes to make Nirmaan '26 the biggest technology festival of the year. Passion, innovation, and coordination is what defines us.</p>
             </header>

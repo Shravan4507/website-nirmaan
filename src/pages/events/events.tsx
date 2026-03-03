@@ -51,7 +51,7 @@ const dayPasses = [
     }
 ]
 
-function Events() {
+function Workshops() {
     const navigate = useNavigate();
     const [selectedDay, setSelectedDay] = useState<typeof dayPasses[0] | null>(null);
     const [selectedDays, setSelectedDays] = useState<number[]>([]);
@@ -90,41 +90,43 @@ function Events() {
     }, [selectedDay]);
 
     return (
-        <main className="events-page">
-            <header className="events-header">
+        <main className="workshops-page">
+            <header className="workshops-header">
                 <div className="header-glow"></div>
+                <span className="section-label">The odyssey</span>
                 <h1>Festival Journey</h1>
+                <div className="section-line"></div>
                 <p>Experience the multi-day odyssey of Nirmaan ’26. From high-stakes hackathons to celebrity showcases, reserve your spot for the definitive technical festival.</p>
             </header>
 
-            <section className="events" id="events">
-                <div className="events__content">
-                    <div className="events__grid">
+            <section className="workshops" id="workshops">
+                <div className="workshops__content">
+                    <div className="workshops__grid">
                         {dayPasses.map((day) => {
                             const isSelected = selectedDays.includes(day.id);
                             return (
-                                <div key={day.id} className={`event-card ${isSelected ? 'selected' : ''}`}>
-                                    <div className="event-card__image-container">
-                                        <img src={day.image} alt={day.title} className="event-card__image" />
+                                <div key={day.id} className={`workshop-card ${isSelected ? 'selected' : ''}`}>
+                                    <div className="workshop-card__image-container">
+                                        <img src={day.image} alt={day.title} className="workshop-card__image" />
                                     </div>
-                                    <h3 className="event-card__title">{day.title}</h3>
-                                    <p className="event-card__subtitle" style={{ color: 'rgba(255,255,255,0.5)', marginTop: '-1rem', marginBottom: '1rem', fontSize: '0.9rem', fontWeight: 600, letterSpacing: '2px' }}>{day.subtitle}</p>
-                                    <ul className="event-card__features">
+                                    <h3 className="workshop-card__title">{day.title}</h3>
+                                    <p className="workshop-card__subtitle" style={{ color: 'rgba(255,255,255,0.5)', marginTop: '-1rem', marginBottom: '1rem', fontSize: '0.9rem', fontWeight: 600, letterSpacing: '2px' }}>{day.subtitle}</p>
+                                    <ul className="workshop-card__features">
                                         {day.features.slice(0, 3).map((feature, idx) => (
                                             <li key={idx}>{feature}</li>
                                         ))}
                                         <li className="more-features">And more highlights...</li>
                                     </ul>
-                                    <div className="event-card__price">{day.price}</div>
-                                    <div className="event-card__actions">
+                                    <div className="workshop-card__price">{day.price}</div>
+                                    <div className="workshop-card__actions">
                                         <button
-                                            className="event-card__btn event-card__btn--explore"
+                                            className="workshop-card__btn workshop-card__btn--explore"
                                             onClick={() => setSelectedDay(day)}
                                         >
                                             Explore
                                         </button>
                                         <button
-                                            className={`event-card__btn event-card__btn--select ${isSelected ? 'selected' : ''}`}
+                                            className={`workshop-card__btn workshop-card__btn--select ${isSelected ? 'selected' : ''}`}
                                             onClick={() => toggleDaySelection(day.id)}
                                         >
                                             {isSelected ? 'Selected' : 'Select'}
@@ -162,8 +164,8 @@ function Events() {
             </section>
 
             {selectedDay && (
-                <div className="event-modal-overlay" ref={modalRef} onClick={closePortal}>
-                    <div className="event-modal-content" ref={modalContentRef} onClick={e => e.stopPropagation()}>
+                <div className="workshop-modal-overlay" ref={modalRef} onClick={closePortal}>
+                    <div className="workshop-modal-content" ref={modalContentRef} onClick={e => e.stopPropagation()}>
                         <button className="close-btn" onClick={closePortal}>×</button>
                         <div className="modal-main">
                             <div className="modal-image">
@@ -213,4 +215,4 @@ function Events() {
     )
 }
 
-export default Events
+export default Workshops

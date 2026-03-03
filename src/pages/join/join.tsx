@@ -8,16 +8,16 @@ import './join.css'
 const ROLES = [
     {
         id: 'stage',
-        tag: 'Events',
+        tag: 'Workshops',
         title: 'STAGE',
-        desc: 'Manage the heart of the festival. Handle stage coordination, performances, and live event flow.',
+        desc: 'Manage the heart of the festival. Handle stage coordination, performances, and live workshop flow.',
         duration: '5s'
     },
     {
         id: 'documentation',
         tag: 'Media',
         title: 'DOCUMENTATION',
-        desc: 'Capture the history of Nirmaan. Record events through photography, videography, and reporting.',
+        desc: 'Capture the history of Nirmaan. Record workshops through photography, videography, and reporting.',
         duration: '6s'
     },
     {
@@ -109,7 +109,7 @@ function Join() {
         zprn: "",
         email: "alex.johnson@example.com",
         phone: "+91 98765 43210",
-        zKey: "ZCN-26-XXXX",
+        nCode: "NRM-26-XXXX",
         college: "Zeal College of Engineering and Research",
         major: "Computer Engineering",
         yearOfStudy: "3rd Year",
@@ -118,7 +118,7 @@ function Join() {
     const [formData, setFormData] = useState({
         firstName: isLoggedIn ? loggedInUser.firstName : '',
         lastName: isLoggedIn ? loggedInUser.lastName : '',
-        zKey: isLoggedIn ? loggedInUser.zKey : '',
+        nCode: isLoggedIn ? loggedInUser.nCode : '',
         zprn: '',
         college: isLoggedIn ? loggedInUser.college : '',
         major: isLoggedIn ? loggedInUser.major : '',
@@ -129,7 +129,7 @@ function Join() {
         whatsappNumber: isLoggedIn ? loggedInUser.phone : '+91 ', // Default to mobile
         preferredTeam: '',
         volunteeredBefore: '',
-        eventName: '',
+        workshopName: '',
         relevantSkills: '',
         tshirtSize: '',
         jacketSize: '',
@@ -140,7 +140,7 @@ function Join() {
 
     const isFieldReadOnly = (fieldName: string) => {
         if (!isLoggedIn) return false;
-        const autoFilledFields = ['firstName', 'lastName', 'zKey', 'email', 'mobileNumber', 'college', 'major', 'yearOfStudy'];
+        const autoFilledFields = ['firstName', 'lastName', 'nCode', 'email', 'mobileNumber', 'college', 'major', 'yearOfStudy'];
         return autoFilledFields.includes(fieldName);
     };
 
@@ -198,9 +198,10 @@ function Join() {
     return (
         <div className="join-page">
             <header className="join-hero">
+                <div className="header-glow"></div>
                 <h1 className="join-title">Shape the Future of Innovation</h1>
                 <p className="join-subtitle">
-                    Nirmaan isn't just an event; it's a legacy built by the most driven minds on campus.
+                    Nirmaan isn't just a workshop; it's a legacy built by the most driven minds on campus.
                     Join the team that turns vision into reality.
                 </p>
                 <a href="#roles" className="join-hero-btn">
@@ -300,13 +301,13 @@ function Join() {
                                     />
                                 </div>
                                 <div className="join-form-group">
-                                    <label className={isFieldReadOnly('zKey') ? 'read-only-label' : ''}>Z-Key (Read Only)</label>
+                                    <label className={isFieldReadOnly('nCode') ? 'read-only-label' : ''}>N-Code (Read Only)</label>
                                     <input
                                         type="text"
-                                        readOnly={isFieldReadOnly('zKey')}
-                                        placeholder="Z-Key"
-                                        value={formData.zKey}
-                                        style={isFieldReadOnly('zKey') ? { opacity: 0.6, cursor: 'not-allowed' } : {}}
+                                        readOnly={isFieldReadOnly('nCode')}
+                                        placeholder="N-Code"
+                                        value={formData.nCode}
+                                        style={isFieldReadOnly('nCode') ? { opacity: 0.6, cursor: 'not-allowed' } : {}}
                                     />
                                 </div>
                                 <div style={{ gridColumn: '1 / -1' }}>
@@ -413,7 +414,7 @@ function Join() {
                             </div>
 
                             <div className="join-form-group">
-                                <label>Have you volunteered in any fest/event before?*</label>
+                                <label>Have you volunteered in any fest/workshop before?*</label>
                                 <div className="join-radio-group">
                                     <label className="join-radio">
                                         <input type="radio" name="volunteered" value="Yes" onChange={e => setFormData({ ...formData, volunteeredBefore: e.target.value })} required /> Yes
@@ -426,12 +427,12 @@ function Join() {
 
                             {formData.volunteeredBefore === 'Yes' && (
                                 <div className="join-form-group">
-                                    <label>If Yes, mention the event name (Optional)</label>
+                                    <label>If Yes, mention the workshop name (Optional)</label>
                                     <input
                                         type="text"
                                         placeholder="Event names"
-                                        value={formData.eventName}
-                                        onChange={e => setFormData({ ...formData, eventName: e.target.value })}
+                                        value={formData.workshopName}
+                                        onChange={e => setFormData({ ...formData, workshopName: e.target.value })}
                                     />
                                 </div>
                             )}

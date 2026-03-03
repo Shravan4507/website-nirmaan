@@ -1,4 +1,4 @@
-.dashboard-page {
+.user-dashboard-page {
     padding: 4rem 2rem 4rem;
     width: 100%;
     min-height: 100vh;
@@ -6,7 +6,31 @@
     justify-content: center;
 }
 
-.dashboard-container {
+/* Loading State */
+.user-dashboard-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 1.5rem;
+    color: #fff;
+}
+
+.user-loader {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #2eff27;
+    border-radius: 50%;
+    animation: user-spin 1s linear infinite;
+}
+
+@keyframes user-spin {
+    to { transform: rotate(360deg); }
+}
+
+.user-dashboard-container {
     width: 100%;
     max-width: 1200px;
     display: flex;
@@ -15,24 +39,25 @@
 }
 
 /* Header Section */
-.dashboard-header {
+.user-dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 2.5rem;
-    border-radius: 7rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 3rem;
 }
 
-.user-profile {
+.user-dashboard-profile {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.user-avatar {
+.user-dashboard-avatar {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -41,106 +66,131 @@
     border: none;
 }
 
-.user-avatar img {
+.user-dashboard-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.user-name {
+.user-dashboard-name {
     font-size: 2.5rem;
     color: #fff;
     margin: 0 0 0.25rem 0;
     letter-spacing: -1px;
 }
 
-.user-id {
+.user-dashboard-id {
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.6);
     margin: 0;
 }
 
-.user-id span {
+.user-dashboard-id span {
     color: #2eff27;
     font-weight: 600;
     margin-left: 0.5rem;
 }
 
-.edit-profile-btn {
-    background: rgba(255, 255, 255, 0.05);
+.user-edit-profile-btn {
+    background: transparent;
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.75rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0.65rem 1.5rem;
     border-radius: 99px;
     cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
     font-weight: 600;
     transition: all 0.2s ease;
 }
 
-.edit-profile-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+.user-edit-profile-btn:active {
+    transform: scale(0.98);
+}
+
+.user-dashboard-header-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.user-logout-btn {
+    background: rgba(0, 0, 0, 0);
+    color: #ff4444;
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    padding: 0.65rem 1.5rem;
+    border-radius: 99px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.user-logout-btn:active {
+    transform: scale(0.98);
 }
 
 /* Stats Section */
-.dashboard-stats {
+.user-dashboard-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
-.stat-card {
-    background: rgba(0, 0, 0, 0.5);
+.user-stat-card {
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(20px);
     padding: 1.5rem 2rem;
-    border-radius: 24px;
+    border-radius: 3rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.stat-label {
+.user-stat-label {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.stat-value {
+.user-stat-value {
     font-size: 2.5rem;
     font-weight: 600;
     color: #fff;
 }
 
 /* Dashboard Grid */
-.dashboard-grid {
+.user-dashboard-grid {
     display: grid;
     grid-template-columns: 1.2fr 2fr;
     gap: 1.5rem;
 }
 
-.dashboard-section {
-    background: rgba(0, 0, 0, 0.5);
+.user-dashboard-section {
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(20px);
     padding: 2rem;
-    border-radius: 34px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 3rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.section-header {
+.user-section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
 
-.section-header h2 {
+.user-section-header h2 {
     font-size: 1.6rem;
     color: #fff;
     margin: 0;
 }
 
-.view-all-btn {
+.user-view-all-btn {
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.5);
@@ -149,18 +199,18 @@
     transition: color 0.2s ease;
 }
 
-.view-all-btn:hover {
+.user-view-all-btn:hover {
     color: #fff;
 }
 
-/* Event List Styling */
-.events-list {
+/* Workshop List Styling */
+.user-workshops-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.event-item {
+.user-workshop-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -171,23 +221,23 @@
     cursor: pointer;
 }
 
-.event-item:hover {
+.user-workshop-item:hover {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.event-info h3 {
+.user-workshop-info h3 {
     font-size: 1.2rem;
     color: #fff;
     margin: 0 0 0.25rem 0;
 }
 
-.event-info p {
+.user-workshop-info p {
     font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.5);
     margin: 0;
 }
 
-.event-status {
+.user-workshop-status {
     padding: 0.5rem 1rem;
     border-radius: 12px;
     font-size: 0.85rem;
@@ -195,24 +245,24 @@
     text-transform: uppercase;
 }
 
-.status-confirmed {
+.user-status-confirmed {
     background: rgba(80, 249, 97, 0.1);
     color: rgb(80, 249, 97);
 }
 
-.status-pending-payment {
+.user-status-pending-payment {
     background: rgba(251, 188, 5, 0.1);
     color: rgb(251, 188, 5);
 }
 
 /* Action Buttons Section */
-.action-buttons {
+.user-action-buttons {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
 }
 
-.action-btn {
+.user-action-btn {
     padding: 1.2rem;
     border-radius: 54px;
     border: none;
@@ -224,17 +274,17 @@
     transition: all 0.2s ease;
 }
 
-.action-btn:hover {
+.user-action-btn:hover {
     background: #f0f0f0;
 }
 
-.action-btn--secondary {
+.user-action-btn--secondary {
     background: rgba(88, 101, 242, 0.2);
     color: #5865F2;
     border: 1px solid rgba(88, 101, 242, 0.2);
 }
 
-.action-btn--secondary:hover {
+.user-action-btn--secondary:hover {
     background: rgba(88, 101, 242, 0.3);
 }
 
@@ -245,34 +295,34 @@ button:active {
 
 /* Responsive Dashboard */
 @media (max-width: 1024px) {
-    .dashboard-grid {
+    .user-dashboard-grid {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 768px) {
-    .dashboard-header {
+    .user-dashboard-header {
         flex-direction: column;
         text-align: center;
         gap: 1.5rem;
     }
 
-    .user-profile {
+    .user-dashboard-profile {
         flex-direction: column;
         gap: 1rem;
     }
 
-    .dashboard-stats {
+    .user-dashboard-stats {
         grid-template-columns: 1fr;
     }
 
-    .user-name {
+    .user-dashboard-name {
         font-size: 2rem;
     }
 }
 
 /* Modal Styling */
-.modal-overlay {
+.user-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -285,15 +335,15 @@ button:active {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    animation: fadeIn 0.3s ease forwards;
+    animation: userFadeIn 0.3s ease forwards;
     padding: 2rem;
 }
 
-.modal-overlay.closing {
-    animation: fadeOut 0.3s ease forwards;
+.user-modal-overlay.user-closing {
+    animation: userFadeOut 0.3s ease forwards;
 }
 
-.modal-card {
+.user-modal-card {
     background: rgba(0, 0, 0, 0.90);
     width: 100%;
     max-width: 600px;
@@ -301,20 +351,20 @@ button:active {
     padding: 3rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     border: none;
-    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: userSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     max-height: 90vh;
     overflow-y: auto;
 }
 
-.modal-card--large {
+.user-modal-card--large {
     max-width: 900px;
 }
 
-.modal-overlay.closing .modal-card {
-    animation: slideDown 0.3s ease forwards;
+.user-modal-overlay.user-closing .user-modal-card {
+    animation: userSlideDown 0.3s ease forwards;
 }
 
-@keyframes fadeIn {
+@keyframes userFadeIn {
     from {
         opacity: 0;
     }
@@ -324,7 +374,7 @@ button:active {
     }
 }
 
-@keyframes fadeOut {
+@keyframes userFadeOut {
     from {
         opacity: 1;
     }
@@ -334,7 +384,7 @@ button:active {
     }
 }
 
-@keyframes slideUp {
+@keyframes userSlideUp {
     from {
         opacity: 0;
         transform: translateY(30px) scale(0.95);
@@ -346,7 +396,7 @@ button:active {
     }
 }
 
-@keyframes slideDown {
+@keyframes userSlideDown {
     from {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -358,20 +408,20 @@ button:active {
     }
 }
 
-.modal-header {
+.user-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
 
-.modal-header h2 {
+.user-modal-header h2 {
     font-size: 1.8rem;
     color: #fff;
     margin: 0;
 }
 
-.close-btn {
+.user-close-btn {
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.9);
@@ -380,38 +430,38 @@ button:active {
     transition: color 0.2s ease;
 }
 
-.close-btn:hover {
+.user-close-btn:hover {
     color: #fff;
 }
 
 /* Edit Form Layout */
-.edit-form {
+.user-edit-form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.form-grid {
+.user-form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
-.form-grid--3-col {
+.user-form-grid--3-col {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.form-group {
+.user-form-group {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
 }
 
-.form-group--span-2 {
+.user-form-group--span-2 {
     grid-column: span 2;
 }
 
-.edit-form label {
+.user-edit-form label {
     font-size: 1rem;
     color: rgb(94, 255, 91);
     font-weight: 500;
@@ -419,8 +469,8 @@ button:active {
     letter-spacing: 1px;
 }
 
-.edit-form input,
-.edit-form select {
+.user-edit-form input,
+.user-edit-form select {
     background: rgba(255, 255, 255, 0);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1rem 1.25rem;
@@ -431,14 +481,14 @@ button:active {
     font-family: inherit;
 }
 
-.edit-form input:focus,
-.edit-form select:focus {
+.user-edit-form input:focus,
+.user-edit-form select:focus {
     outline: none;
     border-color: rgba(82, 39, 255, 0.5);
     background: rgba(255, 255, 255, 0.01);
 }
 
-.read-only-input {
+.user-read-only-input {
     background: transparent !important;
     border: none !important;
     padding-left: 0 !important;
@@ -447,14 +497,49 @@ button:active {
     font-weight: 500;
 }
 
+/* Avatar Source Toggle */
+.user-avatar-source-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.user-toggle-buttons {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.4rem;
+    border-radius: 99px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: fit-content;
+}
+
+.user-toggle-btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 99px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-toggle-btn.active {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 /* Profile Upload Section */
-.profile-upload-section {
+.user-profile-upload-section {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.upload-dropzone {
+.user-upload-dropzone {
     border: 2px dashed rgba(255, 255, 255, 0.15);
     border-radius: 9rem;
     padding: 2rem;
@@ -466,13 +551,13 @@ button:active {
     background: rgba(255, 255, 255, 0);
 }
 
-.upload-dropzone:hover,
-.upload-dropzone.dragging {
+.user-upload-dropzone:hover,
+.user-upload-dropzone.user-dragging {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(82, 39, 255, 0.5);
 }
 
-.upload-preview {
+.user-upload-preview {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -480,38 +565,38 @@ button:active {
     flex-shrink: 0;
 }
 
-.upload-preview img {
+.user-upload-preview img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.upload-text p {
+.user-upload-text p {
     margin: 0;
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.6);
 }
 
-.upload-text p span {
+.user-upload-text p span {
     color: #fff;
     font-weight: 600;
 }
 
-.upload-hint {
+.user-upload-hint {
     font-size: 0.85rem !important;
     color: rgba(255, 255, 255, 0.4) !important;
     margin-top: 0.25rem !important;
-}
+    }
 
 /* Modal Footer */
-.modal-footer {
+.user-modal-footer {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
     margin-top: 1rem;
 }
 
-.cancel-btn {
+.user-cancel-btn {
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
@@ -522,11 +607,11 @@ button:active {
     transition: all 0.2s ease;
 }
 
-.cancel-btn:hover {
+.user-cancel-btn:hover {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.save-btn {
+.user-save-btn {
     background: #fff;
     color: #000;
     border: none;
@@ -537,48 +622,48 @@ button:active {
     transition: all 0.2s ease;
 }
 
-.save-btn:hover {
+.user-save-btn:hover {
     background: #f0f0f0;
 }
 
 /* Modal Responsive */
 @media (max-width: 900px) {
-    .form-grid--3-col {
+    .user-form-grid--3-col {
         grid-template-columns: 1fr 1fr;
     }
 
-    .form-group--span-2 {
+    .user-form-group--span-2 {
         grid-column: span 1;
     }
 }
 
 @media (max-width: 640px) {
 
-    .form-grid,
-    .form-grid--3-col {
+    .user-form-grid,
+    .user-form-grid--3-col {
         grid-template-columns: 1fr;
     }
 
-    .modal-card {
+    .user-modal-card {
         padding: 2rem;
     }
 
-    .upload-dropzone {
+    .user-upload-dropzone {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
     }
 }
 
-/* All Events Modal Styles */
-.all-events-grid {
+/* All Workshops Modal Styles */
+.user-all-workshops-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
     padding: 0.5rem;
 }
 
-.event-card-premium {
+.user-workshop-card-premium {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 24px;
@@ -589,15 +674,13 @@ button:active {
     transition: all 0.3s ease;
 }
 
-
-
-.event-card-header {
+.user-workshop-card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.event-category-tag {
+.user-workshop-category-tag {
     background: rgba(230, 91, 255, 0.1);
     color: rgb(230, 91, 255);
     padding: 0.4rem 0.8rem;
@@ -608,21 +691,21 @@ button:active {
     letter-spacing: 0.5px;
 }
 
-.event-status-tag {
+.user-workshop-status-tag {
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.4rem 0.8rem;
     border-radius: 12px;
 }
 
-.event-card-content h3 {
+.user-workshop-card-content h3 {
     margin: 0;
     font-size: 1.25rem;
     color: #fff;
     margin-bottom: 0.5rem;
 }
 
-.event-date {
+.user-workshop-date {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -631,16 +714,16 @@ button:active {
     margin: 0;
 }
 
-.event-date svg {
+.user-workshop-date svg {
     width: 14px;
     height: 14px;
 }
 
-.event-card-footer {
+.user-workshop-card-footer {
     margin-top: auto;
 }
 
-.event-action-btn {
+.user-workshop-action-btn {
     width: 100%;
     padding: 0.8rem;
     background: rgba(255, 255, 255, 0.05);
@@ -652,9 +735,7 @@ button:active {
     transition: all 0.2s ease;
 }
 
-
-
-.more-events-hint {
+.user-more-workshops-hint {
     text-align: center;
     color: rgba(255, 255, 255, 0.4);
     font-size: 0.9rem;
@@ -664,7 +745,7 @@ button:active {
 }
 
 @media (max-width: 640px) {
-    .all-events-grid {
+    .user-all-workshops-grid {
         grid-template-columns: 1fr;
     }
 }
