@@ -10,19 +10,21 @@ import ImageCropper from '../../components/image-cropper/ImageCropper'
 import colleges from '../../data/colleges.json'
 import { majors } from '../../data/majors'
 import { useToast } from '../../components/toast/Toast'
+import VirtualPass from './VirtualPass'
 import './user-dashboard.css'
 
 function UserDashboard() {
     const navigate = useNavigate()
     const { showToast } = useToast()
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+    const [isPassModalOpen, setIsPassModalOpen] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [isAllWorkshopsModalOpen, setIsAllWorkshopsModalOpen] = useState(false)
     const [isClosing, setIsClosing] = useState(false)
     const [isWorkshopsClosing, setIsWorkshopsClosing] = useState(false)
     const [isDragging, setIsDragging] = useState(false)
     const [imageToCrop, setImageToCrop] = useState<string | null>(null)
     const [loading, setLoading] = useState(true)
-    const [isSubmitting, setIsSubmitting] = useState(false)
 
     // Placeholder data for the dashboard
     const [user, setUser] = useState({
@@ -259,6 +261,7 @@ function UserDashboard() {
                             <h2>Quick Actions</h2>
                         </div>
                         <div className="user-action-buttons">
+                            <button className="user-action-btn" onClick={() => setIsPassModalOpen(true)}>Show Pass</button>
                             <button className="user-action-btn">Download Ticket</button>
                             <button className="user-action-btn">View Schedule</button>
                             <button className="user-action-btn">Find Team</button>
@@ -291,6 +294,13 @@ function UserDashboard() {
                     </section>
                 </div>
             </div>
+
+            {/* Virtual Pass Modal */}
+            <VirtualPass 
+                isOpen={isPassModalOpen} 
+                onClose={() => setIsPassModalOpen(false)} 
+                user={user} 
+            />
 
             {/* Edit Profile Modal */}
             {isEditModalOpen && (

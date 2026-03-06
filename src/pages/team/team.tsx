@@ -1,11 +1,13 @@
+import { useSearchParams } from 'react-router-dom'
 import ChromaGrid from '../../components/chroma-grid/ChromaGrid'
 import './team.css'
 
 const ALL_MEMBERS = [
     // Core Leadership
     {
+        slug: 'shrvan',
         image: `${import.meta.env.BASE_URL}members/Shravan G.png`,
-        title: 'Shravan G',
+        title: 'Shrvan',
         subtitle: 'Event Lead',
         location: 'Core Leadership',
         handle: '@shravan45x',
@@ -21,6 +23,7 @@ const ALL_MEMBERS = [
         }
     },
     {
+        slug: 'sanya-malhotra',
         image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=300&h=300&auto=format&fit=crop',
         title: 'Sanya Malhotra',
         subtitle: 'Technical Head',
@@ -37,6 +40,7 @@ const ALL_MEMBERS = [
         }
     },
     {
+        slug: 'rohan-verma',
         image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&h=300&auto=format&fit=crop',
         title: 'Rohan Verma',
         subtitle: 'Management Lead',
@@ -53,6 +57,7 @@ const ALL_MEMBERS = [
     },
     // Technical & Design
     {
+        slug: 'ishaan-gupta',
         image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&h=300&auto=format&fit=crop',
         title: 'Ishaan Gupta',
         subtitle: 'Full Stack Developer',
@@ -68,6 +73,7 @@ const ALL_MEMBERS = [
         }
     },
     {
+        slug: 'ananya-deshpande',
         image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&h=300&auto=format&fit=crop',
         title: 'Ananya Deshpande',
         subtitle: 'Chief Designer',
@@ -83,6 +89,7 @@ const ALL_MEMBERS = [
         }
     },
     {
+        slug: 'vikram-singh',
         image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=300&h=300&auto=format&fit=crop',
         title: 'Vikram Singh',
         subtitle: 'UI/UX Lead',
@@ -99,6 +106,7 @@ const ALL_MEMBERS = [
     },
     // Marketing & PR
     {
+        slug: 'kritika-roy',
         image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&h=300&auto=format&fit=crop',
         title: 'Kritika Roy',
         subtitle: 'PR Coordinator',
@@ -114,6 +122,7 @@ const ALL_MEMBERS = [
         }
     },
     {
+        slug: 'sahil-kapoor',
         image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=300&h=300&auto=format&fit=crop',
         title: 'Sahil Kapoor',
         subtitle: 'Marketing Head',
@@ -131,6 +140,17 @@ const ALL_MEMBERS = [
 ]
 
 function Team() {
+    const [searchParams, setSearchParams] = useSearchParams()
+    const memberSlug = searchParams.get('member')
+
+    const handleMemberClick = (member: any) => {
+        setSearchParams({ member: member.slug })
+    }
+
+    const handleCloseModal = () => {
+        setSearchParams({})
+    }
+
     return (
         <main className="team-page">
             <header className="team-header">
@@ -141,12 +161,15 @@ function Team() {
 
             <div className="team-container" style={{ position: 'relative', minHeight: '800px' }}>
                 <ChromaGrid
-                    items={ALL_MEMBERS}
+                    items={ALL_MEMBERS as any}
                     radius={400}
                     damping={0.5}
                     fadeOut={0.8}
                     columns={3}
                     showRegister={false}
+                    selectedItemSlug={memberSlug || undefined}
+                    onItemClick={handleMemberClick}
+                    onModalClose={handleCloseModal}
                 />
             </div>
         </main>

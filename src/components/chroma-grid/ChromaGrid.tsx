@@ -7,6 +7,7 @@ export interface ChromaItem {
     image: string;
     title: string;
     subtitle: string;
+    slug?: string;
     handle?: string;
     location?: string;
     description?: string;
@@ -33,6 +34,9 @@ export interface ChromaGridProps {
     fadeOut?: number;
     ease?: string;
     showRegister?: boolean;
+    selectedItemSlug?: string;
+    onItemClick?: (item: ChromaItem) => void;
+    onModalClose?: () => void;
 }
 
 type SetterFn = (v: number | string) => void;
@@ -63,7 +67,10 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
     damping = 0.45,
     fadeOut = 0.6,
     ease = 'power3.out',
-    showRegister = true
+    showRegister = true,
+    selectedItemSlug,
+    onItemClick,
+    onModalClose
 }) => {
     const rootRef = useRef<HTMLDivElement>(null);
     const fadeRef = useRef<HTMLDivElement>(null);
@@ -118,16 +125,40 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
     };
 
     const handleCardClick = (member: ChromaItem) => {
-        setSelectedMember(member);
+        if (onItemClick) {
+            onItemClick(member);
+        } else {
+            setSelectedMember(member);
+        }
     };
 
     const closePortal = () => {
-        const tl = gsap.timeline({
-            onComplete: () => setSelectedMember(null)
-        });
-        tl.to(modalContentRef.current, { scale: 0.9, opacity: 0, duration: 0.3, ease: 'power2.in' })
-            .to(modalRef.current, { opacity: 0, duration: 0.2 }, "-=0.2");
+        if (onModalClose) {
+            onModalClose();
+        } else {
+            const tl = gsap.timeline({
+                onComplete: () => setSelectedMember(null)
+            });
+            tl.to(modalContentRef.current, { scale: 0.9, opacity: 0, duration: 0.3, ease: 'power2.in' })
+                .to(modalRef.current, { opacity: 0, duration: 0.2 }, "-=0.2");
+        }
     };
+
+    useEffect(() => {
+        if (selectedItemSlug) {
+            const item = data.find(i => i.slug === selectedItemSlug);
+            if (item) setSelectedMember(item);
+        } else {
+            // Only clear it if it was previously set (to allow internal modal closing)
+            if (selectedMember) {
+                const tl = gsap.timeline({
+                    onComplete: () => setSelectedMember(null)
+                });
+                tl.to(modalContentRef.current, { scale: 0.9, opacity: 0, duration: 0.3, ease: 'power2.in' })
+                    .to(modalRef.current, { opacity: 0, duration: 0.2 }, "-=0.2");
+            }
+        }
+    }, [selectedItemSlug, data]);
 
     useEffect(() => {
         if (selectedMember && modalRef.current && modalContentRef.current) {
