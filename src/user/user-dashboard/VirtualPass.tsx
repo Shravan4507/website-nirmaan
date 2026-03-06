@@ -34,7 +34,7 @@ const VirtualPass: React.FC<VirtualPassProps> = ({ isOpen, onClose, user }) => {
                         exit={{ scale: 0.8, y: 50, opacity: 0 }}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
                         onClick={(e) => e.stopPropagation()}
-                        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}assets/id-card/id-card-chasis.webp)` }}
+                        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}assets/id-card/id-card-chasis-1.webp)` }}
                     >
                         {/* Profile Picture */}
                         <div className="chassis-avatar-container">
