@@ -10,6 +10,7 @@ interface SearchableDropdownProps {
     required?: boolean
     readOnly?: boolean
     allowManual?: boolean
+    disabled?: boolean
 }
 
 const SearchableDropdown = ({
@@ -20,7 +21,8 @@ const SearchableDropdown = ({
     label,
     required = false,
     readOnly = false,
-    allowManual = true
+    allowManual = true,
+    disabled = false
 }: SearchableDropdownProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const [search, setSearch] = useState('')
@@ -135,7 +137,7 @@ const SearchableDropdown = ({
     }
 
     const handleTriggerClick = () => {
-        if (!isOpen) {
+        if (!isOpen && !disabled) {
             setIsOpen(true)
             setSearch('')
             setActiveIndex(-1)
@@ -152,7 +154,7 @@ const SearchableDropdown = ({
     }
 
     return (
-        <div className="searchable-dropdown" ref={dropdownRef}>
+        <div className={`searchable-dropdown ${disabled ? 'disabled' : ''}`} ref={dropdownRef}>
             {label && <label>{label}</label>}
             <div className={`dropdown-container ${isOpen ? 'is-open' : ''}`}>
                 <div className="dropdown-trigger-wrapper">
@@ -167,12 +169,15 @@ const SearchableDropdown = ({
                         }}
                         onClick={handleTriggerClick}
                         onFocus={() => {
-                            setIsOpen(true)
-                            setSearch('')
+                            if (!disabled) {
+                                setIsOpen(true)
+                                setSearch('')
+                            }
                         }}
                         onKeyDown={handleKeyDown}
                         autoComplete="off"
-                        readOnly={!allowManual && !isOpen}
+                        readOnly={(!allowManual && !isOpen) || disabled}
+                        disabled={disabled}
                     />
                     <svg className={`chevron ${isOpen ? 'up' : 'down'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <polyline points="6 9 12 15 18 9"></polyline>

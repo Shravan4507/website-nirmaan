@@ -180,15 +180,25 @@
     font-size: 1.1rem;
 }
 
-/* Read-only state to match user-dashboard styles */
-.searchable-dropdown.read-only .read-only-input {
+/* Read-only and Disabled states */
+.searchable-dropdown.read-only .read-only-input,
+.searchable-dropdown.disabled .dropdown-trigger-input {
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     padding: 1rem 1.5rem !important;
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
     cursor: not-allowed;
     font-weight: 500;
     font-size: 1.1rem;
     width: 100%;
     border-radius: 34px;
+}
+
+.searchable-dropdown.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.searchable-dropdown.disabled label {
+    color: rgba(230, 91, 255, 0.4);
 }

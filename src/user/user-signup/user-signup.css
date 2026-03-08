@@ -218,94 +218,186 @@
     opacity: 0.5;
 }
 
-/* Submission Overlay */
-.submission-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(20px);
-    z-index: 9999;
+/* Form Locking */
+.signup-form.is-locked {
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.signup-form.is-locked .form-group,
+.signup-form.is-locked .profile-upload-section {
+    opacity: 0.5;
+    filter: grayscale(0.5) blur(1px);
+}
+
+.signup-form.is-locked .signup-footer {
+    opacity: 1;
+    filter: none;
+}
+
+/* Button States & Progress Feedback */
+.signup-btn {
+    width: 100%;
+    max-width: 450px;
+    padding: 1.5rem;
+    border-radius: 99px;
+    border: none;
+    background: #fff;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.loader-box {
-    text-align: center;
-    max-width: 500px;
-    width: 90%;
-}
-
-.main-spinner {
-    width: 80px;
-    height: 80px;
-    border: 3px solid rgba(230, 91, 255, 0.1);
-    border-top: 3px solid rgb(230, 91, 255);
-    border-radius: 50%;
-    margin: 0 auto 3rem;
-    animation: spin 1s linear infinite;
-    box-shadow: 0 0 30px rgba(230, 91, 255, 0.2);
-}
-
-.progress-text h3 {
-    font-size: 2.2rem;
+.signup-btn.submitting {
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid rgba(230, 91, 255, 0.5);
     color: #fff;
-    margin: 0.5rem 0 2rem;
+    cursor: wait;
+    max-width: 550px; /* Expand slightly to fit text */
 }
 
-.step-label {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: rgb(230, 91, 255);
-    font-size: 0.9rem;
-    font-weight: 600;
+.signup-btn.success {
+    background: rgb(94, 255, 91) !important;
+    color: #000;
+    cursor: default;
+    box-shadow: 0 0 30px rgba(94, 255, 91, 0.3);
 }
 
-.progress-bar-bg {
+.btn-progress-content {
     width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.btn-progress-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-mini-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top: 2px solid rgb(230, 91, 255);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.btn-progress-bar-container {
+    width: 80%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     overflow: hidden;
 }
 
-.progress-bar-fill {
+.btn-progress-bar-fill {
     height: 100%;
     background: linear-gradient(to right, rgb(82, 39, 255), rgb(230, 91, 255));
     transition: width 0.4s ease;
-    box-shadow: 0 0 15px rgba(230, 91, 255, 0.5);
+    box-shadow: 0 0 10px rgba(230, 91, 255, 0.5);
 }
 
-.locking-notice {
-    margin-top: 3rem;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 1rem;
-    font-style: italic;
+.btn-success-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Button Loading State */
-.signup-btn.submitting {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.3);
+.btn-check {
+    font-size: 1.5rem;
+    font-weight: 900;
 }
 
-.loading-container {
+.referral-input {
+    font-family: 'Space Mono', monospace !important;
+    letter-spacing: 2px;
+    color: rgb(230, 91, 255) !important;
+    background: rgba(230, 91, 255, 0.05) !important;
+    border-color: rgba(230, 91, 255, 0.2) !important;
+}
+
+/* Referral Verification UI */
+.referral-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.referral-status-icon {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    pointer-events: none;
 }
 
-.spinner {
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-top: 2px solid #fff;
+.referral-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(230, 91, 255, 0.2);
+    border-top: 2px solid rgb(230, 91, 255);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
+}
+
+.status-valid {
+    color: rgb(94, 255, 91);
+    font-weight: 900;
+    font-size: 1.4rem;
+}
+
+.status-invalid {
+    color: #ff4d4d;
+    font-weight: 900;
+    font-size: 1.4rem;
+}
+
+.referral-hint {
+    margin: 0.5rem 0 0 1rem !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.5px;
+}
+
+.referral-hint.success {
+    color: rgb(94, 255, 91) !important;
+    font-weight: 500;
+}
+
+.referral-hint.error {
+    color: #ff4d4d !important;
+    font-weight: 500;
+}
+
+.referral-input.valid {
+    border-color: rgba(94, 255, 91, 0.3) !important;
+    background: rgba(94, 255, 91, 0.02) !important;
+}
+
+.referral-input.invalid {
+    border-color: rgba(255, 77, 77, 0.3) !important;
+    background: rgba(255, 77, 77, 0.02) !important;
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes spin {
@@ -344,5 +436,9 @@
 
     .progress-text h3 {
         font-size: 1.6rem;
+    }
+
+    .success-box h2 {
+        font-size: 1.8rem;
     }
 }

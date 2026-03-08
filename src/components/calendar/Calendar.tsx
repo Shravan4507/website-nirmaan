@@ -7,6 +7,8 @@ interface CalendarProps {
     label?: string
     required?: boolean
     readOnly?: boolean
+    minDate?: string // YYYY-MM-DD
+    maxDate?: string // YYYY-MM-DD
 }
 
 const Calendar = ({
@@ -14,7 +16,9 @@ const Calendar = ({
     onChange,
     label,
     required = false,
-    readOnly = false
+    readOnly = false,
+    minDate,
+    maxDate
 }: CalendarProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const [viewDate, setViewDate] = useState(value ? new Date(value) : new Date())
@@ -30,7 +34,9 @@ const Calendar = ({
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
     const currentYear = new Date().getFullYear()
-    const years = Array.from({ length: 100 }, (_, i) => currentYear - 80 + i)
+    const startYear = minDate ? new Date(minDate).getFullYear() : currentYear - 80
+    const endYear = maxDate ? new Date(maxDate).getFullYear() : currentYear + 20
+    const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i)
 
     const formatDisplayDate = (val: string) => {
         if (!val) return ""
@@ -87,6 +93,10 @@ const Calendar = ({
             const iso = `${y}-${m}-${d}`
             const dateObj = new Date(iso)
             if (!isNaN(dateObj.getTime())) {
+                // Check bounds
+                if (minDate && iso < minDate) return;
+                if (maxDate && iso > maxDate) return;
+                
                 onChange(iso)
                 setViewDate(dateObj)
             }
@@ -126,11 +136,13 @@ const Calendar = ({
         for (let i = 1; i <= daysInMonth; i++) {
             const dateStr = `${viewDate.getFullYear()}-${String(viewDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`
             const isActive = value === dateStr
+            const isOutOfRange = (minDate && dateStr < minDate) || (maxDate && dateStr > maxDate)
+            
             days.push(
                 <div
                     key={i}
-                    className={`calendar-day ${isActive ? 'active' : ''}`}
-                    onClick={() => handleDateSelect(i)}
+                    className={`calendar-day ${isActive ? 'active' : ''} ${isOutOfRange ? 'disabled' : ''}`}
+                    onClick={() => !isOutOfRange && handleDateSelect(i)}
                 >
                     {i}
                 </div>

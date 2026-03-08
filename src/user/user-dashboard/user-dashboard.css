@@ -43,6 +43,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 2rem;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -748,4 +749,475 @@ button:active {
     .user-all-workshops-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Downloads Dropdown Styles */
+.user-download-dropdown-container {
+    position: relative;
+    width: 100%;
+}
+
+.user-download-main-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+.user-download-main-btn .dropdown-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+.user-download-main-btn.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.user-download-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    border: none;
+    border-radius: 2rem;
+    padding: 0.8rem;
+    z-index: 100;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    animation: dropdownSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dropdownSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-download-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 3rem;
+    transition: transform 0.2s ease;
+}
+
+.user-download-item:active {
+    transform: scale(0.98);
+}
+
+.user-download-item .item-icon {
+    font-size: 1.2rem;
+}
+
+/* Resources Modal Specific Styles */
+.user-modal-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.user-modal-subtitle {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.95rem;
+}
+
+.user-resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin: 1rem 0;
+}
+
+.user-resource-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.user-resource-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.resource-icon-box {
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.resource-details {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.resource-details h3 {
+    margin: 0 0 0.2rem 0;
+    font-size: 1.05rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.resource-details p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.resource-download-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: #fff;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.resource-download-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* Dashboard Stats Pills */
+.user-dashboard-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.user-stats-pill {
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+    padding: 0.4rem 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+/* Leaderboard Styles */
+.user-leaderboard-section {
+    margin-bottom: 0rem;
+}
+
+.leaderboard-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.leaderboard-header {
+    display: grid;
+    grid-template-columns: 80px 100px 180px 1fr 100px;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-item {
+    display: grid;
+    grid-template-columns: 80px 100px 180px 1fr 100px;
+    padding: 0.1rem 1.5rem;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: all 0.2s ease;
+}
+
+.leaderboard-item:last-child {
+    border-bottom: none;
+}
+
+.leaderboard-item.is-current-user {
+    background: rgba(82, 39, 255, 0.1);
+}
+
+.rank-col {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.avatar-col {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.leaderboard-avatar-wrapper {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.avatar-protection-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: transparent;
+    cursor: default;
+}
+
+.leaderboard-avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* Image itself is unreachable */
+}
+
+.ncode-col {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.leaderboard-ncode {
+    background: transparent;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+}
+
+.name-col {
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 1.5rem;
+}
+
+.points-col {
+    text-align: right;
+}
+
+.xp-badge {
+    background: transparent;
+    color: #fff;
+    padding: 0.3rem 0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+    .user-dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .leaderboard-header, .leaderboard-item {
+        grid-template-columns: 60px 80px 140px 1fr 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 2rem;
+    }
+
+    .user-dashboard-profile {
+        gap: 1.25rem;
+    }
+
+    .user-dashboard-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-dashboard-name {
+        font-size: 1.8rem;
+    }
+
+    .user-dashboard-header-actions {
+        width: 100%;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .user-edit-profile-btn, .user-logout-btn {
+        flex: 1;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .user-dashboard-section {
+        padding: 1.5rem;
+        border-radius: 2rem;
+    }
+
+    .leaderboard-header, .leaderboard-item {
+        grid-template-columns: 40px 60px 0px 1fr 60px;
+        padding: 0.75rem 1rem;
+    }
+
+    .ncode-col {
+        display: none;
+    }
+
+    .user-view-perks-btn {
+        font-size: 1.1rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .user-action-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .leaderboard-header, .leaderboard-item {
+        grid-template-columns: 35px 50px 0px 1fr 50px;
+        gap: 0.5rem;
+    }
+
+    .rank-col {
+        font-size: 0.85rem;
+    }
+
+    .name-col {
+        font-size: 0.95rem;
+        padding-right: 0.5rem;
+    }
+
+    .xp-badge {
+        font-size: 0.9rem;
+    }
+
+    .leaderboard-avatar-wrapper {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Perks Button & List */
+.user-view-perks-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.user-view-perks-btn:hover {
+    color: #fff;
+}
+
+.user-view-perks-btn:active {
+    transform: scale(0.98);
+}
+
+.user-perks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.user-perk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.perk-icon {
+    font-size: 1.5rem;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.perk-info h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.perk-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.4;
 }

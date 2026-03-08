@@ -4,8 +4,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    /* backdrop-filter: blur(12px); */
+    background: rgba(0, 0, 0, 0.85); /* Darkened for better focus */
+    backdrop-filter: blur(10px);
     z-index: 2000;
     display: flex;
     justify-content: center;
@@ -23,8 +23,7 @@
     background-position: center;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.8), 
-                0 0 40px rgba(82, 39, 255, 0.2);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
 }
@@ -32,14 +31,13 @@
 /* Profile Picture Layer */
 .chassis-avatar-container {
     position: absolute;
-    top: 175px;
-    left: 75px;
-    width: 130px;
+    top: 28%;
+    left: 17.5%;
+    width: 32.5%;
     aspect-ratio: 1/1;
     border-radius: 50%;
     overflow: hidden;
     background: #1a1a1a;
-    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); */
     z-index: 5;
 }
 
@@ -53,113 +51,93 @@
 .chassis-user-details {
     position: absolute;
     top: 54%;
-    left: 60px;
+    left: 12.5%;
+    width: 55%;
     text-align: left;
 }
 
 .chassis-name {
     font-family: inherit;
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: #fff;
     text-transform: uppercase;
     line-height: 1.1;
-    margin-top: -1.5rem;
-    margin-bottom: 1rem;
+    margin-top: -1.2rem;
+    margin-bottom: 0.8rem;
     letter-spacing: -0.02em;
-    width: 70%;
+    word-wrap: break-word;
 }
 
-.chassis-group {
+.chassis-group, .chassis-college {
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.85);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    width: 50%;
     font-weight: 500;
-    margin-bottom: 1rem;
-}
-
-.chassis-college {
-    font-family: inherit;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.85);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    width: 50%;
-    font-weight: 500;
+    margin-bottom: 0.6rem;
+    opacity: 0.9;
 }
 
 .chassis-validity {
     font-family: inherit;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    width: 50%;
     font-weight: 500;
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 /* QR Code Section */
 .chassis-qr-section {
     position: absolute;
-    bottom: 7px;
-    left: 20px;
+    bottom: 2%;
+    left: 5%;
     display: flex;
-    align-items: flex-end;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 .chassis-qr-wrapper {
     background: transparent;
-    padding: 8px;
-    border-radius: 8px;
-    width: 100px;
-    height: 100px;
+    padding: 5px;
+    width: 90px;
+    height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
     filter: invert(1);
 }
 
-/* .chassis-scan-text {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-size: 0.6rem;
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 0.2em;
-    opacity: 0.8;
-} */
-
 /* Side Text / Green Stripe Overlay */
 .chassis-side-text {
     position: absolute;
-    right: 70px;
+    right: 17.5%;
     top: 45%;
     transform: translateY(-50%) rotate(-90deg);
     transform-origin: center right;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 .chassis-side-text span {
     font-family: inherit;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 600;
-    color: #000; /* Contrast against green */
+    color: #000;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
 }
 
 /* ID Code */
 .chassis-id-string {
     position: absolute;
-    bottom: 7%;
-    right: 23px;
+    bottom: 6%;
+    right: 6%;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #fff;
     letter-spacing: 0.1em;
@@ -168,41 +146,105 @@
 /* Close Button */
 .pass-close-btn {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
     background: rgba(0, 0, 0, 0.3);
     border: none;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     transition: all 0.2s ease;
-    z-index: 20;
+    z-index: 30;
 }
 
 .pass-close-btn:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* @media (max-width: 480px) {
+/* Mobile Specific Optimizations */
+@media (max-width: 480px) {
+    .virtual-pass-overlay {
+        padding: 10px;
+    }
+
     .virtual-pass-chassis {
         max-width: 320px;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     }
+
+    .chassis-avatar-container {
+        top: 27.5%;
+        left: 17.5%;
+        width: 33%;
+    }
+
+    .chassis-user-details {
+        top: 54%;
+        left: 12.5%;
+        width: 55%;
+    }
+
+    .chassis-name {
+        font-size: 1.35rem;
+        margin-top: -1.3rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .chassis-group, .chassis-college {
+        font-size: 0.65rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .chassis-validity {
+        font-size: 0.55rem;
+        margin-top: 1.8rem;
+    }
+
     .chassis-qr-wrapper {
-        width: 80px;
-        height: 80px;
+        width: 75px;
+        height: 75px;
+        padding: 4px;
     }
+
+    .chassis-side-text {
+        right: 17%;
+    }
+
+    .chassis-side-text span {
+        font-size: 1.8rem;
+    }
+
+    .chassis-id-string {
+        font-size: 0.75rem;
+        bottom: 6.5%;
+        right: 7%;
+    }
+
+    .pass-close-btn {
+        top: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Ultra Small Devices */
+@media (max-width: 340px) {
+    .virtual-pass-chassis {
+        max-width: 280px;
+    }
+    
     .chassis-name {
         font-size: 1.1rem;
     }
-    .chassis-group {
-        font-size: 0.9rem;
-    }
+    
     .chassis-side-text span {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
-} */
+}

@@ -61,7 +61,7 @@ function Home() {
   })
 
   useEffect(() => {
-    const eventDate = new Date('April 03, 2026 00:00:00').getTime()
+    const eventDate = new Date('April 09, 2026 00:00:00').getTime()
 
     const timer = setInterval(() => {
       const now = new Date().getTime()

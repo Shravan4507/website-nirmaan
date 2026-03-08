@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth, db, storage } from '../../config/firebase'
-import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, serverTimestamp, query, collection, orderBy, limit, getDocs } from 'firebase/firestore'
 import { ref, uploadString, getDownloadURL } from 'firebase/storage'
 import { onAuthStateChanged } from 'firebase/auth'
 import SearchableDropdown from '../../components/searchable-dropdown/SearchableDropdown'
@@ -20,11 +20,18 @@ function UserDashboard() {
     const [isPassModalOpen, setIsPassModalOpen] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isAllWorkshopsModalOpen, setIsAllWorkshopsModalOpen] = useState(false)
+    const [isResourcesModalOpen, setIsResourcesModalOpen] = useState(false)
+    const [isPerksModalOpen, setIsPerksModalOpen] = useState(false)
     const [isClosing, setIsClosing] = useState(false)
     const [isWorkshopsClosing, setIsWorkshopsClosing] = useState(false)
+    const [isResourcesClosing, setIsResourcesClosing] = useState(false)
+    const [isPerksClosing, setIsPerksClosing] = useState(false)
     const [isDragging, setIsDragging] = useState(false)
     const [imageToCrop, setImageToCrop] = useState<string | null>(null)
+    const [isDownloading, setIsDownloading] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [isDownloadDropdownOpen, setIsDownloadDropdownOpen] = useState(false)
+    const downloadDropdownRef = useRef<HTMLDivElement>(null)
 
     // Placeholder data for the dashboard
     const [user, setUser] = useState({
@@ -44,8 +51,12 @@ function UserDashboard() {
         googleAvatar: "",
         customAvatar: "" as string | null,
         avatarType: "google" as "google" | "custom",
+        points: 0,
+        referralCount: 0,
         registeredWorkshops: [] as any[]
     })
+
+    const [leaderboard, setLeaderboard] = useState<any[]>([])
 
     const [editForm, setEditForm] = useState({ ...user })
 
@@ -73,6 +84,8 @@ function UserDashboard() {
                             googleAvatar: data.googleAvatar || data.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${data.firstName}`,
                             customAvatar: data.customAvatar || null,
                             avatarType: data.avatarType || "google",
+                            points: data.points || 0,
+                            referralCount: data.referralCount || 0,
                             registeredWorkshops: data.registeredWorkshops || []
                         }
                         setUser(userData)
@@ -95,6 +108,33 @@ function UserDashboard() {
         return () => unsubscribe()
     }, [navigate, showToast])
 
+    useEffect(() => {
+        const fetchLeaderboard = async () => {
+            try {
+                const q = query(collection(db, 'users'), orderBy('points', 'desc'), limit(10))
+                const querySnapshot = await getDocs(q)
+                const boardData = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+                setLeaderboard(boardData)
+            } catch (err) {
+                console.error('Error fetching leaderboard:', err)
+            }
+        }
+        fetchLeaderboard()
+    }, [])
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (downloadDropdownRef.current && !downloadDropdownRef.current.contains(event.target as Node)) {
+                setIsDownloadDropdownOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
     const studyYears = ["1st Year", "2nd Year", "3rd Year", "4th Year", "5th Year", "Passed Out"]
     const currentYear = new Date().getFullYear()
     const completionYears = Array.from({ length: 10 }, (_, i) => (currentYear - 2 + i).toString())
@@ -115,6 +155,22 @@ function UserDashboard() {
         }, 300)
     }
 
+    const handleResourcesClose = () => {
+        setIsResourcesClosing(true)
+        setTimeout(() => {
+            setIsResourcesModalOpen(false)
+            setIsResourcesClosing(false)
+        }, 300)
+    }
+
+    const handlePerksClose = () => {
+        setIsPerksClosing(true)
+        setTimeout(() => {
+            setIsPerksModalOpen(false)
+            setIsPerksClosing(false)
+        }, 300)
+    }
+
     const handleEditSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         const firebaseUser = auth.currentUser
@@ -124,15 +180,41 @@ function UserDashboard() {
         try {
             let finalAvatar = editForm.avatar
             let customAvatarUrl = editForm.customAvatar
+            let googleAvatarUrl = editForm.googleAvatar
             let avatarType = editForm.avatarType
 
-            // If a new custom image was uploaded/cropped (it's a data URL)
+            // Helper to fetch external image and convert to blob
+            const fetchAndUpload = async (url: string, path: string) => {
+                try {
+                    const response = await fetch(url);
+                    const blob = await response.blob();
+                    const storageRef = ref(storage, path);
+                    await uploadString(storageRef, await new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result as string);
+                        reader.readAsDataURL(blob);
+                    }), 'data_url');
+                    return await getDownloadURL(storageRef);
+                } catch (e) {
+                    console.error("Fetch/Upload Error:", e);
+                    return url;
+                }
+            };
+
+            // 1. If a new custom image was uploaded/cropped (it's a data URL)
             if (editForm.avatar.startsWith('data:image')) {
-                const avatarRef = ref(storage, `avatars/${firebaseUser.uid}`)
-                await uploadString(avatarRef, editForm.avatar, 'data_url')
-                finalAvatar = await getDownloadURL(avatarRef)
-                customAvatarUrl = finalAvatar
+                const customRef = ref(storage, `avatars/${firebaseUser.uid}/custom`)
+                await uploadString(customRef, editForm.avatar, 'data_url')
+                const newUrl = await getDownloadURL(customRef)
+                finalAvatar = newUrl
+                customAvatarUrl = newUrl
                 avatarType = 'custom'
+            }
+
+            // 2. If using google avatar but it's still an external URL, mirror it
+            if (avatarType === 'google' && googleAvatarUrl && !googleAvatarUrl.includes('firebasestorage')) {
+                googleAvatarUrl = await fetchAndUpload(googleAvatarUrl, `avatars/${firebaseUser.uid}/google`);
+                finalAvatar = googleAvatarUrl;
             }
 
             const updateData = {
@@ -140,6 +222,7 @@ function UserDashboard() {
                 yearOfStudy: editForm.yearOfStudy,
                 completionYear: editForm.completionYear,
                 avatar: finalAvatar,
+                googleAvatar: googleAvatarUrl,
                 customAvatar: customAvatarUrl,
                 avatarType: avatarType,
                 updatedAt: serverTimestamp()
@@ -147,7 +230,7 @@ function UserDashboard() {
 
             await updateDoc(doc(db, 'users', firebaseUser.uid), updateData)
             
-            const updatedUser = { ...user, ...editForm, avatar: finalAvatar, customAvatar: customAvatarUrl, avatarType }
+            const updatedUser = { ...user, ...editForm, avatar: finalAvatar, googleAvatar: googleAvatarUrl, customAvatar: customAvatarUrl, avatarType }
             setUser(updatedUser)
             setEditForm(updatedUser)
             showToast('Success', 'Profile updated successfully!', 'success')
@@ -223,6 +306,59 @@ function UserDashboard() {
         handleImageUpload(file)
     }
 
+    const handleDownloadPass = async () => {
+        setIsDownloading(true)
+        showToast('Generating Pass', 'Building your high-res graphics...', 'info')
+
+        try {
+            const { default: html2canvas } = await import('html2canvas');
+            const element = document.getElementById('virtual-pass-static-capture');
+            
+            if (!element) {
+                console.error("Static pass element not found");
+                showToast('Error', 'Initialization failed. Please refresh.', 'error');
+                setIsDownloading(false);
+                return;
+            }
+
+            // Small delay to ensure images are painted
+            await new Promise(r => setTimeout(r, 800));
+
+            const canvas = await html2canvas(element, {
+                useCORS: true,
+                allowTaint: false,
+                scale: 3, // High quality but memory safe
+                backgroundColor: null,
+                logging: false,
+                onclone: (doc) => {
+                    // Force visibility in the clone
+                    const el = doc.getElementById('virtual-pass-static-capture');
+                    if (el) {
+                        el.style.left = '0';
+                        el.style.position = 'relative';
+                    }
+                }
+            });
+
+            const dataUrl = canvas.toDataURL('image/png', 1.0);
+            
+            const link = document.createElement('a');
+            link.download = `Nirmaan26_Pass_${user.firstName}.png`;
+            link.href = dataUrl;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast('Success!', 'Pass saved successfully.', 'success');
+
+        } catch (err) {
+            console.error('Pass Download Error:', err);
+            showToast('Download Error', 'Failed to capture image. Please try again.', 'error');
+        } finally {
+            setIsDownloading(false);
+        }
+    }
+
     if (loading) {
         return (
             <div className="user-dashboard-loading">
@@ -243,7 +379,17 @@ function UserDashboard() {
                         </div>
                         <div className="user-dashboard-info">
                             <h1 className="user-dashboard-name">Welcome, {user.firstName} {user.lastName}</h1>
-                            <p className="user-dashboard-id">N-Code: <span>{user.nCode}</span></p>
+                            <div className="user-dashboard-badges">
+                                <p className="user-dashboard-id">N-Code: <span>{user.nCode}</span></p>
+                                <div className="user-stats-pill">
+                                    <span className="stats-icon">💎</span>
+                                    <span className="stats-value">{user.points} XP</span>
+                                </div>
+                                <div className="user-stats-pill user-stats-pill--referrals">
+                                    <span className="stats-icon">🤝</span>
+                                    <span className="stats-value">{user.referralCount} Referrals</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="user-dashboard-header-actions">
@@ -262,10 +408,100 @@ function UserDashboard() {
                         </div>
                         <div className="user-action-buttons">
                             <button className="user-action-btn" onClick={() => setIsPassModalOpen(true)}>Show Pass</button>
-                            <button className="user-action-btn">Download Ticket</button>
-                            <button className="user-action-btn">View Schedule</button>
+                            <div className="user-download-dropdown-container" ref={downloadDropdownRef}>
+                                <button 
+                                    className={`user-action-btn user-download-main-btn ${isDownloadDropdownOpen ? 'active' : ''}`}
+                                    onClick={() => setIsDownloadDropdownOpen(!isDownloadDropdownOpen)}
+                                    disabled={isDownloading}
+                                >
+                                    {isDownloading ? 'Generating...' : 'Downloads'}
+                                    <span className="dropdown-arrow">▼</span>
+                                </button>
+                                
+                                {isDownloadDropdownOpen && (
+                                    <div className="user-download-menu">
+                                        <button 
+                                            className="user-download-item" 
+                                            onClick={() => {
+                                                handleDownloadPass();
+                                                setIsDownloadDropdownOpen(false);
+                                            }}
+                                        >
+                                            <span className="item-icon">^_^</span>
+                                            Pass
+                                        </button>
+                                        <button 
+                                            className="user-download-item" 
+                                            onClick={() => {
+                                                showToast('Coming Soon', 'Certificates will be available after the event concludes.', 'info');
+                                                setIsDownloadDropdownOpen(false);
+                                            }}
+                                        >
+                                            <span className="item-icon">*_*</span>
+                                            Certificate
+                                        </button>
+                                        <button 
+                                            className="user-download-item" 
+                                            onClick={() => {
+                                                setIsResourcesModalOpen(true);
+                                                setIsDownloadDropdownOpen(false);
+                                            }}
+                                        >
+                                            <span className="item-icon">^_^</span>
+                                            Resources
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                            <button className="user-action-btn" onClick={() => navigate('/schedule')}>View Schedule</button>
                             <button className="user-action-btn">Find Team</button>
                             <button className="user-action-btn user-action-btn--secondary">Join Discord</button>
+                        </div>
+                    </section>
+
+                    {/* Leaderboard Section */}
+                    <section className="user-dashboard-section user-leaderboard-section">
+                        <div className="user-section-header">
+                            <h2>Hall of Fame</h2>
+                            <button className="user-view-perks-btn" onClick={() => setIsPerksModalOpen(true)}>Show Perks</button>
+                        </div>
+                        <div className="leaderboard-container">
+                            <div className="leaderboard-header">
+                                <span className="rank-col">Rank</span>
+                                <span className="avatar-col"></span>
+                                <span className="ncode-col">N-Code</span>
+                                <span className="name-col">Name</span>
+                                <span className="points-col">XP</span>
+                            </div>
+                            <div className="leaderboard-list">
+                                {leaderboard.map((entry, index) => (
+                                    <div key={entry.id} className={`leaderboard-item ${entry.uid === auth.currentUser?.uid ? 'is-current-user' : ''}`}>
+                                        <div className="rank-col">
+                                            {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : index + 1}
+                                        </div>
+                                        <div className="avatar-col">
+                                            <div className="leaderboard-avatar-wrapper">
+                                                <div className="avatar-protection-overlay" onContextMenu={(e) => e.preventDefault()}></div>
+                                                <img 
+                                                    src={entry.avatar} 
+                                                    alt="" 
+                                                    draggable={false}
+                                                    onContextMenu={(e) => e.preventDefault()}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="ncode-col">
+                                            <span className="leaderboard-ncode">{entry.nCode}</span>
+                                        </div>
+                                        <div className="name-col">
+                                            <span className="leaderboard-name">{entry.firstName} {entry.lastName}</span>
+                                        </div>
+                                        <div className="points-col">
+                                            <span className="xp-badge">{entry.points}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </section>
 
@@ -500,6 +736,96 @@ function UserDashboard() {
                     imageSrc={imageToCrop}
                     onCropComplete={onCropComplete}
                     onCancel={() => setImageToCrop(null)}
+                />
+            )}
+            {/* Resources Modal */}
+            {isResourcesModalOpen && (
+                <div className={`user-modal-overlay ${isResourcesClosing ? 'user-closing' : ''}`} onClick={handleResourcesClose}>
+                    <div className="user-modal-card user-modal-card--large" onClick={e => e.stopPropagation()}>
+                        <div className="user-modal-header">
+                            <div className="user-modal-title-group">
+                                <h2>Resource Hub</h2>
+                                <p className="user-modal-subtitle">Download available workshop materials and guides</p>
+                            </div>
+                            <button className="user-close-btn" onClick={handleResourcesClose}>&times;</button>
+                        </div>
+
+                        <div className="user-resources-grid">
+                            {[
+                                { id: 1, name: 'Nirmaan 2026 Event Guide', type: 'PDF', size: '2.4 MB', icon: '📖' },
+                                { id: 2, name: 'Web3 & Blockchain PPT', type: 'PPTX', size: '15.2 MB', icon: '📊' },
+                                { id: 3, name: 'UI/UX Design Assets', type: 'ZIP', size: '45.8 MB', icon: '🎨' },
+                                { id: 4, name: 'Robotics Workshop Code', type: 'GitHub', size: '-', icon: '💻' },
+                                { id: 5, name: 'Cyber Security Handout', type: 'PDF', size: '1.1 MB', icon: '🛡️' },
+                                { id: 6, name: 'AI/ML Model Datasets', type: 'DATA', size: '120 MB', icon: '🧠' }
+                            ].map(resource => (
+                                <div key={resource.id} className="user-resource-card">
+                                    <div className="resource-icon-box">{resource.icon}</div>
+                                    <div className="resource-details">
+                                        <h3>{resource.name}</h3>
+                                        <p>{resource.type} • {resource.size}</p>
+                                    </div>
+                                    <button 
+                                        className="resource-download-btn"
+                                        onClick={() => showToast('Download Started', `Fetching ${resource.name}...`, 'info')}
+                                    >
+                                        ↓
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="user-modal-footer">
+                            <button className="user-cancel-btn" onClick={handleResourcesClose}>Done</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Perks Modal */}
+            {isPerksModalOpen && (
+                <div className={`user-modal-overlay ${isPerksClosing ? 'user-closing' : ''}`} onClick={handlePerksClose}>
+                    <div className="user-modal-card user-modal-card--small" onClick={e => e.stopPropagation()}>
+                        <div className="user-modal-header">
+                            <div className="user-modal-title-group">
+                                <h2>Leaderboard Perks</h2>
+                                <p className="user-modal-subtitle">What you get for being at the top!</p>
+                            </div>
+                            <button className="user-close-btn" onClick={handlePerksClose}>&times;</button>
+                        </div>
+
+                        <div className="user-perks-list">
+                            {[
+                                { id: 1, title: 'Early Access', desc: 'Get priority entry to workshops and tech talks.', icon: '⚡' },
+                                { id: 2, title: 'Premium Merch', desc: 'Limited edition Nirmaan hoodie for the Top 3.', icon: '👕' },
+                                { id: 3, title: 'VIP Networking', desc: 'Exclusive lunch with event speakers and sponsors.', icon: '🤝' },
+                                { id: 4, title: 'Cloud Credits', desc: 'Up to $200 in Google Cloud/AWS credits.', icon: '☁️' }
+                            ].map(perk => (
+                                <div key={perk.id} className="user-perk-item">
+                                    <span className="perk-icon">{perk.icon}</span>
+                                    <div className="perk-info">
+                                        <h4>{perk.title}</h4>
+                                        <p>{perk.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="user-modal-footer">
+                            <button className="user-cancel-btn" onClick={handlePerksClose}>Got it!</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
+            {/* Hidden Pass for PDF Generation */}
+            {user && (
+                <VirtualPass 
+                    isOpen={false} 
+                    onClose={() => {}} 
+                    isStatic={true} 
+                    user={user} 
                 />
             )}
         </div>

@@ -168,6 +168,16 @@
     border: none;
 }
 
+.calendar-day.disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+.calendar-day.disabled:hover {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+}
+
 /* Pickers Grid (Months/Years) */
 .picker-grid {
     display: grid;
